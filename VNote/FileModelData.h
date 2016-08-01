@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface FileModelData : NSObject
 
 @property(nonatomic,strong)NSString *foldername;
 @property(strong,nonatomic)NSString *titleName;
 @property(strong,nonatomic)NSString *texTName;
+@property(strong,nonatomic)UIImage *imageName;
 
 @end

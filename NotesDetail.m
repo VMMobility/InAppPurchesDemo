@@ -15,16 +15,25 @@
 #import "NoteTableViewCell.h"
 #import "FileViewController.h"
 #import "NotesDescriptionViewController.h"
+#import <Parse/Parse.h>
+#import "NotesModelData.h"
+#import "FolderViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <WYPopoverController/WYPopoverController.h>
+#import "NotesPopViewViewController.h"
+#import "NotePopTableCellTableViewCell.h"
 
-
-@interface NotesDetail ()<UITableViewDataSource,UITableViewDelegate>
+@interface NotesDetail ()<UITableViewDataSource,UITableViewDelegate,popViewControllerDelegate>
 {
     UIImage *myImage;
     NSMutableArray *tabArray;
     NSIndexPath *indexpath;
     AppDelegate *appDel;
     UIImage *image1;
-
+    
+    NSMutableArray *notesTableArray;
+    NotesModelData *noteData;
+     WYPopoverController *popOverController;
 
 }
 @property (weak, nonatomic) IBOutlet UIView *myLabelView;
@@ -46,15 +55,8 @@
      [super viewDidLoad];
     
     
-    //Hide table view
-    //self.myTableFileView.hidden=YES;
-    
-   
-        _fileModel = [[FileModelData alloc]init];
-        _fileModel.titleName= _nModel.titleName;
-    _fileModel.texTName=_nModel.textName;
-    _fileModel.foldername=_nModel.folderName;
-    
+       
+
     //Gardient color use in background color
     UIColor *darkColor=[UIColor colorWithRed:0.21 green:0.17 blue:0.13 alpha:1.00];
     UIColor *lightColor=[UIColor colorWithRed:0.21 green:0.23 blue:0.23 alpha:1.00];
@@ -76,21 +78,7 @@
     //Hide backBar Button
      self.navigationItem.hidesBackButton=YES;
     
-    
-    
-//    myImage = [UIImage imageNamed:@"2016-01-06(1)"];
-//    UIButton *myButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [myButton1 setImage:myImage forState:UIControlStateNormal];
-//    
-//    // myButton.showsTouchWhenHighlighted = YES;
-//    myButton1.frame = CGRectMake(0.0, 0.0, myImage.size.width, myImage.size.height);
-//    
-//    [myButton1 addTarget:self action:@selector(tapp) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIBarButtonItem *leftButton1 = [[UIBarButtonItem alloc] initWithCustomView:myButton1];
-//    self.navigationItem.rightBarButtonItem = leftButton1;
-//
-    
+    self.folderNameLabel.text = self.foldername;
     
     
     
@@ -105,31 +93,31 @@
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:myButton];
     self.navigationItem.leftBarButtonItem = leftButton;
+    
+    
+    
+    
+    myImage = [UIImage imageNamed:@"2016-01-06(1)"];
+    UIButton *myButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myButton1 setImage:myImage forState:UIControlStateNormal];
+    
+    // myButton.showsTouchWhenHighlighted = YES;
+    myButton1.frame = CGRectMake(10.0, 0.0,24, 24);
+    
+    [myButton1 addTarget:self action:@selector(tapped :) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton1 = [[UIBarButtonItem alloc] initWithCustomView:myButton1];
+    self.navigationItem.rightBarButtonItem = leftButton1;
+    
+
    
-     tabArray=[[NSMutableArray alloc]init];
-    
-     appDel = [UIApplication sharedApplication].delegate;
-   
-    if (appDel.allfile == nil)
-    {
-        tabArray=[[NSMutableArray alloc]init];
-        [appDel.allfile addObject:_fileModel];
-    
-    }else{
-        
-         [appDel.allfile addObject:_fileModel];
-    }
-    
-    tabArray = appDel.allfile;
-    
-    
-    
-    
-    
-    
-   
-    // Do any additional setup after loading the view.
+
 }
+
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -147,25 +135,22 @@
 }
 */
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.view endEditing:YES];
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //[tabArray removeAllObjects];
     
-    _folderNameLabel.text=_nModel.folderName;
-   
-    tabArray = appDel.allfile;
+    [self.view endEditing:YES];
+    notesTableArray=[[NSMutableArray alloc]init];
+  
+    [self callFileData];
     
     
-    if ([tabArray count]==0)
-    {
-        self.myTableFileView.hidden=YES;
-    }
-    else
-    {
-        self.tapToCreateAgain.hidden=YES;
-    }
-    [self.myTableFileView reloadData];
-
 
 }
 
@@ -189,18 +174,118 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return[tabArray count];
+    
+    
+    
+    if ([notesTableArray count]==0)
+    {
+        self.myTableFileView.hidden=YES;
+        
+    }
+    else
+    {
+        
+        self.myTableFileView.hidden=NO;
+        self.tapToCreateAgain.hidden=YES;
+        self.tapToCreateAgain.hidden=YES;
+    }
+
+    return[notesTableArray count];
+
+
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Processing data....";
+    hud.labelColor=[UIColor whiteColor];
+   
+    noteData = notesTableArray[indexPath.row];
     NoteTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"not" forIndexPath:indexPath];
+    cell.fileNameLabel.text = noteData.fileName;
+  
     
-   _fileModel = [tabArray objectAtIndex:indexPath.row];
+    [hud hide:YES];
     
-       cell.fileNameLabel.text= _fileModel.titleName;
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = v;
     
+
      return cell;
 }
+
+
+
+//Editing table cell data
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [_myTableFileView setEditing:editing animated:YES];
+    if (editing)
+    {
+//                addButton.enabled = NO;
+    }
+    else {
+//                addButton.enabled = YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        
+//            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Warning !!" message:@"Do you want to delete this file" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+//            [alert show];
+//       
+    
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Warning!"
+                                              message:@"Do you want to delete this file"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"NO", @"NO action")
+                                       style:UIAlertActionStyleCancel
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           NSLog(@"NO action");
+                                           
+                                       }];
+        
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"YES", @"YES action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"YES action");
+                                   
+                                       [self deletRowwithobjectId:indexPath];
+                                       
+                                       
+                                      
+                                   }];
+        
+        [alertController addAction:okAction];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+       }
+        else
+        {
+      
+        }
+        
+    
+    }
+
+
+    
+
+
 - (IBAction)addFileButtonClick:(UIButton *)sender
 {
     [self performSegueWithIdentifier:@"file" sender:indexpath];
@@ -210,18 +295,26 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"file"])
+    if ([segue.identifier isEqualToString:@"notesDesc"])
     {
-    FileViewController *file = segue.destinationViewController;
-    file.currentFoldername = self.folderNameLabel.text;
-    }
-    else
-    {
+        
         indexpath=sender;
-    NotesDescriptionViewController *notesDesc=segue.destinationViewController;
-    notesDesc.descModel=[tabArray objectAtIndex:indexpath.row];
+        noteData=notesTableArray[indexpath.row];
+        NotesDescriptionViewController *notesDesc=segue.destinationViewController;
+        notesDesc.descModel = notesTableArray[indexpath.row];
 
     }
+
+if ([segue.identifier isEqualToString:@"file"])
+{
+    FileViewController *file = segue.destinationViewController;
+    file.currentFoldername = self.foldername;
+
+}
+
+
+
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -229,6 +322,155 @@
     [self performSegueWithIdentifier:@"notesDesc" sender:indexPath];
 }
 
+-(void)callFileData
+{
 
+    PFQuery *query = [PFQuery queryWithClassName:@"FileData"];
+    [query whereKey:@"Parent" equalTo:_foldername];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"%@",objects);
+            [self responseObject:objects];
+            [_myTableFileView reloadData];
+              } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+    }];
+  
+  
+}
+-(void)responseObject:(NSArray *)objects
+{
+    for (NSDictionary *dict in objects)
+    {
+        noteData=[[NotesModelData alloc]init];
+        noteData.fileName=dict[@"FileName"];
+        noteData.fileContent=dict[@"FileContent"];
+        noteData.imageDataa = dict[@"profilePicture"];
+        noteData.folderName = dict[@"Parent"];
+        PFObject *myObject1 = [objects objectAtIndex:indexpath.row];
+        NSString *FileobjectId = [myObject1 objectId];
+        NSLog(@"File object id is %@",FileobjectId);
+        noteData.fileobjectId=FileobjectId;
+        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+        [defaults setObject:FileobjectId forKey:@"FILEOBJECTID"];
+        [defaults synchronize];
+        [notesTableArray addObject:noteData];
+    }
+
+//    [self.myTableFileView reloadData];
+
+}
+
+
+
+
+
+
+
+
+
+
+-(void)deletRowwithobjectId:(NSIndexPath *)indexPath
+{
+   
+   noteData = notesTableArray[indexPath.row];
+      [notesTableArray removeObjectAtIndex:indexPath.row];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"FileData"];
+    [query whereKey:@"FileName" notEqualTo:noteData.fileobjectId];
+    
+    PFObject *obj = [query getObjectWithId:noteData.fileobjectId];
+    NSLog(@"removeObject : %@",obj);
+    [obj deleteInBackground];
+    [_myTableFileView endUpdates];
+    [_myTableFileView reloadData];
+    
+    
+}
+
+
+
+-(void)tapped:(UIButton*)sender
+{
+    
+    UIView *btn = (UIView *)sender;
+    
+    if (popOverController == nil)
+    {
+        NotesPopViewViewController  *popUpVC = [self.storyboard instantiateViewControllerWithIdentifier:@"notesPop"];
+        
+        popUpVC.delegate = self;
+        
+        CGSize contentSize = CGSizeMake(200,80);
+        
+        popUpVC.preferredContentSize = contentSize;
+        
+        
+        
+        popOverController = [[WYPopoverController alloc] initWithContentViewController:popUpVC];
+        popOverController.delegate = self;
+        popOverController.passthroughViews = @[btn];
+        
+        
+        //        popOverController.popoverLayoutMargins = UIEdgeInsetsMake(CGFloat top, <#CGFloat left#>, <#CGFloat bottom#>, <#CGFloat right#>)
+        
+        popOverController.popoverLayoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+        
+        
+        popOverController.theme = [WYPopoverTheme themeForIOS7];
+        popOverController.theme.outerCornerRadius = 2;
+        
+        
+        popOverController.theme.borderWidth = 2;
+        popOverController.theme.outerStrokeColor = [UIColor lightGrayColor];
+        
+        //        popOverController.theme.innerStrokeColor = [UIColor redColor];
+        
+        
+        popOverController.theme.arrowHeight = 8;
+        popOverController.theme.arrowBase= 15;
+        popOverController.theme.fillTopColor = [UIColor grayColor];
+        popOverController.theme.overlayColor= [UIColor clearColor];
+        
+        CGRect biggerBounds = CGRectInset(sender.bounds, -6, -6);
+        
+        [popOverController presentPopoverFromRect:biggerBounds inView:sender permittedArrowDirections:(WYPopoverArrowDirectionUp) animated:YES options:(WYPopoverAnimationOptionFadeWithScale)];
+        
+        //        [BlurEffect blurredImageOfView:self.view onBaseView:chatSubMenuVC.view withTintColor:[UIColor whiteColor]];
+    }else
+    {
+        [popOverController dismissPopoverAnimated:YES completion:^{
+            popOverController.delegate = nil;
+            popOverController = nil;
+        }];
+    }
+}
+-(BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)popoverController
+{
+    return YES;
+}
+-(void)popoverControllerDidDismissPopover:(WYPopoverController *)popoverController
+{
+    popOverController.delegate=nil;
+    popOverController=nil;
+}
+
+
+-(void)logOutAction
+{
+    [popOverController dismissPopoverAnimated:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)homeAction
+{
+    [popOverController dismissPopoverAnimated:NO];
+    NSArray *viewController=self.navigationController.viewControllers;
+    UIViewController *homeController=viewController[1];
+    [self.navigationController popToViewController:homeController animated:YES];
+}
 
 @end

@@ -5,6 +5,7 @@ platform :ios, '8.4'
 
 target 'VNote' do
 pod 'WYPopoverController', '~> 0.2.2'
+pod 'MBProgressHUD', '~> 0.9.2'
 end
 
 target 'VNoteTests' do

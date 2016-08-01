@@ -11,14 +11,17 @@
 #import "FileModelData.h"
 #import "NotesDetail.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "FolderViewController.h"
+#import "ViewController.h"
 
-
-@interface FileViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+@interface FileViewController ()<UITextViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIImage *myImage;
     UIImagePickerController *picker;
     NSString *fileName;
     NSString *textName;
+    UIImage *imgName;
     FileModelData *fModel;
     NSMutableArray *fileTableArray;
     NSIndexPath *indexpath;
@@ -26,6 +29,7 @@
 
 }
 @property (weak, nonatomic) IBOutlet UIView *tapToCreateAttachFileView;
+@property (weak, nonatomic) IBOutlet UIImageView *myUploadImage;
 
 @property (weak, nonatomic) IBOutlet UITextView *myTextView;
 - (IBAction)tapToAttachFile1:(UIButton *)sender;
@@ -164,8 +168,13 @@
 
 - (IBAction)saveFileButtonAction:(UIButton *)sender
 {
+    
     fileName=_fileNameTextFieldItem.text;
     textName=_textViewItem.text;
+    imgName=_myUploadImage.image;
+    
+   
+   
     
     NSMutableString *mutableString=[[NSMutableString alloc]init];
     BOOL goodToGo=YES;
@@ -187,7 +196,7 @@
         
         
         UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Alert !!"
+                                              alertControllerWithTitle:@"Alert!"
                                               message:mutableString
                                               preferredStyle:UIAlertControllerStyleAlert];
         
@@ -219,17 +228,65 @@
     
     if (goodToGo)
     {
+      
+       
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Successfully"
+                                              message:@"Your data have save successfully"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"OK action");
+                                       [self createFilemethod];
+                                       [self.view endEditing:YES];
+                                       [self.navigationController popViewControllerAnimated:YES];
+                                   }];
+        [alertController addAction:okAction];
+       
+        [self presentViewController:alertController animated:NO completion:nil];
         
-        [self localData];
+
         
-        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"Your note save successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"Your data have save successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
     }
 
     
 }
 
+
+
+
+-(void)createFilemethod
+{
+    [self.view endEditing:YES];
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSString *LoginObjectId=[defaults objectForKey:@"LOGINOBJECTID"];
+    [defaults synchronize];
+    
+    
+    PFObject *fileData=[PFObject objectWithClassName:@"FileData"];
+    fileData[@"Parent"]=self.currentFoldername;
+    fileData[@"FileName"]=fileName;
+    fileData[@"FileContent"]=textName;
+    fileData[@"CreatedBy"]=LoginObjectId;
+    [fileData saveInBackground];
+    if (imgName)
+    {
+        NSData *imageData=UIImagePNGRepresentation(imgName);
+        PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
+        [imageFile saveInBackground];
+        [fileData setObject:imageFile forKey:@"profilePicture"];
+        [fileData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+            }
+        }];
+}
+}
 
 
 
@@ -263,47 +320,49 @@
     else
     {
         
-        //        picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-        //        [self presentViewController:picker animated:YES completion:Nil];
+                picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+                [self presentViewController:picker animated:YES completion:Nil];
         
     }
     
     NSLog(@"Index = %ld - Title = %@", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    switch (buttonIndex) {
+//        case 0:
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//}
+
+
+
+
+
+
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    switch (buttonIndex) {
-        case 0:
-            [self.navigationController popViewControllerAnimated:YES];
-            
-            break;
-            
-        default:
-            break;
-    }
-}
-
-
-
-
-
-
-
--(void)localData
-{
-    fModel=[[FileModelData alloc]init];
     
-    fModel.foldername = self.currentFoldername;
-    fModel.titleName=fileName;
-    fModel.texTName=textName;
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    _myUploadImage.image = chosenImage;
     
-    
-    [fileTableArray addObject:fModel];
-    appdel.allfile = [appdel.allfile arrayByAddingObjectsFromArray:fileTableArray ];
-    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
 
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
 
 @end

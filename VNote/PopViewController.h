@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//Protocol declaration
 @protocol popViewControllerDelegate <NSObject>
 
+//Protocol method declaration
 -(void)logOutAction;
+-(void)DeleteAction;
+-(void)ChangePasswordAction;
+-(void)AboutUsAction;
 
 @end
 

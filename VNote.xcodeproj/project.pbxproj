@@ -14,6 +14,12 @@
 		C322BE571C439AFA0092FA9C /* NotesDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C322BE561C439AFA0092FA9C /* NotesDescriptionViewController.m */; };
 		C3285D5D1C3E255B00EFDBC1 /* HomePageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */; };
 		C3285D611C3E3EFB00EFDBC1 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3285D601C3E3EFB00EFDBC1 /* FolderViewController.m */; };
+		C32945621C5F2EA40003DCA1 /* NotesDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */; };
+		C32945651C5F31500003DCA1 /* NotesDetailPopViewModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */; };
+		C32945681C5F36870003DCA1 /* notesDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */; };
+		C329456B1C5F519F0003DCA1 /* NotesPopViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */; };
+		C329456E1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */; };
+		C32945711C5F54510003DCA1 /* notesPopModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945701C5F54510003DCA1 /* notesPopModelData.m */; };
 		C32E10C01C3F777E007C6CB2 /* FolderModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32E10BF1C3F777E007C6CB2 /* FolderModelData.m */; };
 		C32E10C61C3FD448007C6CB2 /* NotesDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = C32E10C51C3FD448007C6CB2 /* NotesDetail.m */; };
 		C32FF5C01C3CD9F500953F56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5BF1C3CD9F500953F56 /* main.m */; };
@@ -30,6 +36,12 @@
 		C332AF2C1C40C39600C91CB3 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF2B1C40C39600C91CB3 /* NoteTableViewCell.m */; };
 		C332AF2F1C40EE8E00C91CB3 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF2E1C40EE8E00C91CB3 /* FileViewController.m */; };
 		C332AF331C413AAF00C91CB3 /* FileModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF321C413AAF00C91CB3 /* FileModelData.m */; };
+		C334DEAA1C4E062A00B21B6A /* NotesDescriptionModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */; };
+		C341E2B21C4CEB2900B25825 /* HomeModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C341E2B11C4CEB2900B25825 /* HomeModelData.m */; };
+		C341E2B51C4D02CE00B25825 /* NotesModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C341E2B41C4D02CE00B25825 /* NotesModelData.m */; };
+		C390A4B41C4E5216006EC575 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */; };
+		C3EFE3241C4637B5002702CB /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */; };
+		C3EFE3281C466F44002702CB /* AboutUs.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EFE3271C466F44002702CB /* AboutUs.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +76,18 @@
 		C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageTableViewCell.m; path = ../HomePageTableViewCell.m; sourceTree = "<group>"; };
 		C3285D5F1C3E3EFB00EFDBC1 /* FolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
 		C3285D601C3E3EFB00EFDBC1 /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
+		C32945601C5F2EA40003DCA1 /* NotesDetailPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailPopView.h; sourceTree = "<group>"; };
+		C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailPopView.m; sourceTree = "<group>"; };
+		C32945631C5F31500003DCA1 /* NotesDetailPopViewModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailPopViewModelData.h; sourceTree = "<group>"; };
+		C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailPopViewModelData.m; sourceTree = "<group>"; };
+		C32945661C5F36870003DCA1 /* notesDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesDetailTableViewCell.h; sourceTree = "<group>"; };
+		C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesDetailTableViewCell.m; sourceTree = "<group>"; };
+		C32945691C5F519F0003DCA1 /* NotesPopViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesPopViewViewController.h; sourceTree = "<group>"; };
+		C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesPopViewViewController.m; sourceTree = "<group>"; };
+		C329456C1C5F52090003DCA1 /* NotePopTableCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePopTableCellTableViewCell.h; sourceTree = "<group>"; };
+		C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePopTableCellTableViewCell.m; sourceTree = "<group>"; };
+		C329456F1C5F54510003DCA1 /* notesPopModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesPopModelData.h; sourceTree = "<group>"; };
+		C32945701C5F54510003DCA1 /* notesPopModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesPopModelData.m; sourceTree = "<group>"; };
 		C32E10BE1C3F777E007C6CB2 /* FolderModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderModelData.h; sourceTree = "<group>"; };
 		C32E10BF1C3F777E007C6CB2 /* FolderModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderModelData.m; sourceTree = "<group>"; };
 		C32E10C41C3FD448007C6CB2 /* NotesDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesDetail.h; path = ../NotesDetail.h; sourceTree = "<group>"; };
@@ -95,6 +119,18 @@
 		C332AF2E1C40EE8E00C91CB3 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		C332AF311C413AAF00C91CB3 /* FileModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileModelData.h; path = VNote/FileModelData.h; sourceTree = "<group>"; };
 		C332AF321C413AAF00C91CB3 /* FileModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileModelData.m; path = VNote/FileModelData.m; sourceTree = "<group>"; };
+		C334DEA81C4E062A00B21B6A /* NotesDescriptionModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDescriptionModelData.h; sourceTree = "<group>"; };
+		C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDescriptionModelData.m; sourceTree = "<group>"; };
+		C341E2B01C4CEB2900B25825 /* HomeModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModelData.h; sourceTree = "<group>"; };
+		C341E2B11C4CEB2900B25825 /* HomeModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModelData.m; sourceTree = "<group>"; };
+		C341E2B31C4D02CE00B25825 /* NotesModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesModelData.h; sourceTree = "<group>"; };
+		C341E2B41C4D02CE00B25825 /* NotesModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesModelData.m; sourceTree = "<group>"; };
+		C390A4B21C4E5216006EC575 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordViewController.h; path = ../ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordViewController.m; path = ../ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		C3EFE3221C4637B5002702CB /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		C3EFE3261C466F44002702CB /* AboutUs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUs.h; sourceTree = "<group>"; };
+		C3EFE3271C466F44002702CB /* AboutUs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUs.m; sourceTree = "<group>"; };
 		CCCF7C3C9677B46A15DC2F99 /* libPods-VNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,6 +169,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C320322F1C5633DA00680624 /* ForgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				C390A4B21C4E5216006EC575 /* ForgetPasswordViewController.h */,
+				C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */,
+			);
+			name = ForgetPassword;
+			sourceTree = "<group>";
+		};
 		C32081621C44DCE20056E470 /* PopView */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +196,14 @@
 			children = (
 				C322BE551C439AFA0092FA9C /* NotesDescriptionViewController.h */,
 				C322BE561C439AFA0092FA9C /* NotesDescriptionViewController.m */,
+				C334DEA81C4E062A00B21B6A /* NotesDescriptionModelData.h */,
+				C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */,
+				C32945601C5F2EA40003DCA1 /* NotesDetailPopView.h */,
+				C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */,
+				C32945631C5F31500003DCA1 /* NotesDetailPopViewModelData.h */,
+				C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */,
+				C32945661C5F36870003DCA1 /* notesDetailTableViewCell.h */,
+				C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */,
 			);
 			name = NotesDescription;
 			sourceTree = "<group>";
@@ -184,6 +237,14 @@
 				C32E10C51C3FD448007C6CB2 /* NotesDetail.m */,
 				C332AF2A1C40C39600C91CB3 /* NoteTableViewCell.h */,
 				C332AF2B1C40C39600C91CB3 /* NoteTableViewCell.m */,
+				C341E2B31C4D02CE00B25825 /* NotesModelData.h */,
+				C341E2B41C4D02CE00B25825 /* NotesModelData.m */,
+				C32945691C5F519F0003DCA1 /* NotesPopViewViewController.h */,
+				C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */,
+				C329456C1C5F52090003DCA1 /* NotePopTableCellTableViewCell.h */,
+				C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */,
+				C329456F1C5F54510003DCA1 /* notesPopModelData.h */,
+				C32945701C5F54510003DCA1 /* notesPopModelData.m */,
 			);
 			name = NoteDetail;
 			sourceTree = "<group>";
@@ -214,15 +275,17 @@
 		C32FF5BD1C3CD9F400953F56 /* VNote */ = {
 			isa = PBXGroup;
 			children = (
+				C320322F1C5633DA00680624 /* ForgetPassword */,
+				C3EFE3291C466F49002702CB /* AboutUs */,
+				C3EFE3251C46464D002702CB /* ChangePassword */,
 				C32081621C44DCE20056E470 /* PopView */,
 				C322BE581C439B280092FA9C /* NotesDescription */,
 				C32E10C81C3FE787007C6CB2 /* NoteDetail */,
 				C32FF5FB1C3D1FFB00953F56 /* AppDelegate */,
 				C32FF5FA1C3D071B00953F56 /* HomePage */,
 				C32FF5F61C3D020600953F56 /* SignUp */,
-				C32FF5C71C3CD9F500953F56 /* Main.storyboard */,
 				C3285D5E1C3E2EDC00EFDBC1 /* Login */,
-				C332AF301C40F0AA00C91CB3 /* File */,
+				C32FF5C71C3CD9F500953F56 /* Main.storyboard */,
 				C32FF5CA1C3CD9F500953F56 /* Assets.xcassets */,
 				C3285D641C3E3F4100EFDBC1 /* Folder */,
 				C32FF5CC1C3CD9F500953F56 /* LaunchScreen.storyboard */,
@@ -274,6 +337,9 @@
 				C32FF5F81C3D071500953F56 /* HomePage.m */,
 				C3285D5B1C3E255B00EFDBC1 /* HomePageTableViewCell.h */,
 				C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */,
+				C341E2B01C4CEB2900B25825 /* HomeModelData.h */,
+				C332AF301C40F0AA00C91CB3 /* File */,
+				C341E2B11C4CEB2900B25825 /* HomeModelData.m */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -297,6 +363,24 @@
 			);
 			name = File;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		C3EFE3251C46464D002702CB /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				C3EFE3221C4637B5002702CB /* ChangePasswordViewController.h */,
+				C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */,
+			);
+			name = ChangePassword;
+			sourceTree = "<group>";
+		};
+		C3EFE3291C466F49002702CB /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				C3EFE3261C466F44002702CB /* AboutUs.h */,
+				C3EFE3271C466F44002702CB /* AboutUs.m */,
+			);
+			name = AboutUs;
 			sourceTree = "<group>";
 		};
 		F405652A0D8E7DCFA75359FD /* Pods */ = {
@@ -490,21 +574,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32FF5C61C3CD9F500953F56 /* ViewController.m in Sources */,
+				C32945651C5F31500003DCA1 /* NotesDetailPopViewModelData.m in Sources */,
+				C32945621C5F2EA40003DCA1 /* NotesDetailPopView.m in Sources */,
 				C332AF331C413AAF00C91CB3 /* FileModelData.m in Sources */,
 				C32E10C61C3FD448007C6CB2 /* NotesDetail.m in Sources */,
 				C32081681C4508560056E470 /* PopModelData.m in Sources */,
 				C3285D611C3E3EFB00EFDBC1 /* FolderViewController.m in Sources */,
 				C32081611C44D7D80056E470 /* PopViewController.m in Sources */,
 				C322BE571C439AFA0092FA9C /* NotesDescriptionViewController.m in Sources */,
+				C32945711C5F54510003DCA1 /* notesPopModelData.m in Sources */,
 				C32FF5F51C3CFC9600953F56 /* SignUp.m in Sources */,
 				C32E10C01C3F777E007C6CB2 /* FolderModelData.m in Sources */,
+				C3EFE3281C466F44002702CB /* AboutUs.m in Sources */,
+				C329456E1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m in Sources */,
+				C334DEAA1C4E062A00B21B6A /* NotesDescriptionModelData.m in Sources */,
+				C341E2B21C4CEB2900B25825 /* HomeModelData.m in Sources */,
 				C32081651C44DD0A0056E470 /* PopTableViewCell.m in Sources */,
 				C32FF5F91C3D071500953F56 /* HomePage.m in Sources */,
 				C332AF2F1C40EE8E00C91CB3 /* FileViewController.m in Sources */,
 				C32FF5C31C3CD9F500953F56 /* AppDelegate.m in Sources */,
 				C32FF5C01C3CD9F500953F56 /* main.m in Sources */,
+				C3EFE3241C4637B5002702CB /* ChangePasswordViewController.m in Sources */,
 				C3285D5D1C3E255B00EFDBC1 /* HomePageTableViewCell.m in Sources */,
 				C332AF2C1C40C39600C91CB3 /* NoteTableViewCell.m in Sources */,
+				C390A4B41C4E5216006EC575 /* ForgetPasswordViewController.m in Sources */,
+				C32945681C5F36870003DCA1 /* notesDetailTableViewCell.m in Sources */,
+				C341E2B51C4D02CE00B25825 /* NotesModelData.m in Sources */,
+				C329456B1C5F519F0003DCA1 /* NotesPopViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,7 +741,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03E36478158EA4C182C43839 /* Pods-VNote.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				INFOPLIST_FILE = VNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -658,7 +754,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 367CF9B1B905EDBF6089A525 /* Pods-VNote.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				INFOPLIST_FILE = VNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

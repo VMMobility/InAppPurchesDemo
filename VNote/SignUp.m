@@ -8,8 +8,16 @@
 
 #import "SignUp.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Parse/Parse.h>
 
-@interface SignUp ()
+@interface SignUp ()<UIAlertViewDelegate>
+{
+    NSString *firstName;
+    NSString *lastName;
+    NSString *userName;
+    NSString *email;
+    NSString *password;
+}
 - (IBAction)alreadyHaveAccountButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
@@ -24,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIView *emailText;
 @property (weak, nonatomic) IBOutlet UIView *password;
 @property (weak, nonatomic) IBOutlet UIButton *signUp;
+@property (weak, nonatomic) IBOutlet UIButton *mySignup;
 
 @end
 
@@ -62,10 +71,9 @@
     _signUp.layer.cornerRadius=5;
     _signUp.layer.borderWidth=1;
 
-
-
-
-
+   _mySignup.backgroundColor=[UIColor colorWithRed:0.65 green:0.11 blue:0.71 alpha:1.00];
+    _mySignup.layer.cornerRadius=5;
+    _mySignup.layer.borderWidth=1;
 
 }
 
@@ -88,12 +96,192 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-- (IBAction)signUpButtonAction:(UIButton *)sender {
-}
+- (IBAction)signUpButtonAction:(UIButton *)sender
+{
+    
+
+   [self myMethod];
+
+    
+    NSMutableString *mutableString=[[NSMutableString alloc]init];
+    BOOL goToGo=YES;
+    if (firstName.length==0)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"First name is required\n"];
+    }
+    if (lastName.length==0)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Last name is required\n"];
+    }
+    if (userName.length==0)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Username is required\n"];
+    }
+    
+    else if (![self NSStringIsValidUserName:userName])
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Invalid username\n"];
+    }
+    if (email.length==0)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Email is required\n"];
+    }
+    else if (![self NSStringIsValidEmail:email])
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Invalid EmailID\n"];
+    }
+
+    if (password.length==0)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Password is required"];
+    }
+    else if (password.length<5)
+    {
+        goToGo=NO;
+        [mutableString appendString:@"Password should be  min 5 character\n"];
+    }
+
+    if ((!goToGo))
+    {
+        
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Alert!"
+                                              message:mutableString
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                       style:UIAlertActionStyleCancel
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           NSLog(@"Cancel action");
+                                           
+                                       }];
+        
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"OK action");
+                                   }];
+        
+        [alertController addAction:okAction];
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }
+    if (goToGo)
+    {
+        
+        [self myMethod];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"You have sign up successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+
+       
+    }
+
+
 
 - (IBAction)hideKeypad:(id)sender
 {
     [self.view endEditing:YES];
 }
+- (void)myMethod {
+    
+    firstName=_firstNameTextField.text;
+    lastName=_lastNameTextField.text;
+    userName=_userNameTextField.text;
+    email=_emailTextField.text;
+    password=_passwordTextField.text;
+    
+    PFUser *signUp=[PFUser user];
+    signUp.username=userName;
+    signUp.password=password;
+    signUp.email = email;
+
+    signUp[@"FirstNmae"]=firstName;
+    signUp[@"LastName"]=lastName;
+   
+
+    
+    
+    // other fields can be set just like with PFObject
+    
+    [signUp signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            // Hooray! Let them use the app now.
+        }
+        else
+        {   NSString *errorString = [error userInfo][@"error"];
+            // Show the errorString somewhere and let the user try again.
+        }
+    }];
+
+
+
+
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+
+-(BOOL)NSStringIsValidUserName:(NSString *)checkUserName
+{
+    NSString *username1 = @"[a-zA-Z0-9]*$";
+    NSPredicate *predicate= [NSPredicate predicateWithFormat:@"SELF MATCHES %@", username1];
+    BOOL isValid = [predicate evaluateWithObject:checkUserName];
+    return isValid;
+}
+
+-(BOOL)NSStringIsValidPassword:(NSString *)checkPassword
+{
+    
+    NSString *password1 = @"^\w*(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])(?=\w*[@#$%^&+=])\w*$";
+    NSPredicate *predicate= [NSPredicate predicateWithFormat:@"SELF MATCHES %@", password1];
+    BOOL isValid = [predicate evaluateWithObject:checkPassword];
+    return isValid;
+}
+
+
+
+
+
+
+
 
 @end

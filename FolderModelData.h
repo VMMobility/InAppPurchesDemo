@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface FolderModelData : NSObject
-@property(strong,nonatomic)NSString *folderName;
+@property(strong,nonatomic)NSString *objectId;
 @property(strong,nonatomic)NSString *titleName;
 @property(strong,nonatomic)NSString *textName;
+@property(strong,nonatomic)UIImage *imageName;
+
+@property(strong,nonatomic)NSMutableArray *imageNameArray;
 
 
 @property(strong,nonatomic)NSMutableArray *allFiles;

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FileModelData.h"
+#import "NotesModelData.h"
 
 @interface NotesDescriptionViewController : UIViewController
-@property(strong,nonatomic)FileModelData *descModel;
+@property(strong,nonatomic)NotesModelData *descModel;
+
+
 @end

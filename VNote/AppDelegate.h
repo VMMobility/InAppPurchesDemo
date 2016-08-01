@@ -12,8 +12,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) NSArray *allNotes;
+@property (strong, nonatomic) NSMutableArray *allNotes;
 
 @property (strong, nonatomic) NSMutableArray *allfile;
+
+@property (strong, nonatomic) NSMutableArray *tableArr;
 @end
 

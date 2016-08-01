@@ -15,16 +15,26 @@
 #import "NotesDetail.h"
 #import <WYPopoverController/WYPopoverController.h>
 #import "PopViewController.h"
+#import <Parse/Parse.h>
+#import "HomeModelData.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 
-@interface HomePage ()<UITableViewDelegate,UITableViewDataSource,WYPopoverControllerDelegate,popViewControllerDelegate>
+@interface HomePage ()<UITableViewDelegate,UITableViewDataSource,WYPopoverControllerDelegate,popViewControllerDelegate,UIAlertViewDelegate>
 {
-    NSArray *tabArray;
+    NSMutableArray *tabArray;
     FolderModelData *cModel;
     NSArray *folderAll;
     NSIndexPath *indexpath;
     WYPopoverController *popOverController;
     UIImage *myImage;
+    
+    
+    HomeModelData *hModel;
+    NSMutableArray *homeTableArray;
+    
+   
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -51,7 +61,16 @@
     
     
     [super viewDidLoad];
+    [self.view endEditing:YES];
+    tabArray=[[NSMutableArray alloc]init];
+   
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Processing data....";
+    hud.labelColor=[UIColor whiteColor];
+
+   
+   
     // Do any additional setup after loading the view.
     
     //Navigation hide,title,title color,hide navigation back button
@@ -59,7 +78,7 @@
     self.navigationItem.title=@"Home";
     self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
-   self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.937 green:0.392 blue:0.392 alpha:1];    self.navigationItem.hidesBackButton=YES;
+   self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.65 green:0.11 blue:0.71 alpha:1.00];    self.navigationItem.hidesBackButton=YES;
     
     
     //Gardient color use in background color
@@ -79,7 +98,7 @@
     [myButton1 setImage:myImage forState:UIControlStateNormal];
     
     // myButton.showsTouchWhenHighlighted = YES;
-    myButton1.frame = CGRectMake(0.0, 0.0, myImage.size.width, myImage.size.height);
+    myButton1.frame = CGRectMake(10.0, 0.0,24, 24);
     
     [myButton1 addTarget:self action:@selector(tapped :) forControlEvents:UIControlEventTouchUpInside];
     
@@ -94,34 +113,28 @@
     
     _tapToCreate.layer.cornerRadius=5;
     _tapToCreate.layer.borderWidth=1;
-        
 }
+-(void)viewWillDisappear:(BOOL)animated{
+ [self.view endEditing:YES];
+}
+
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    tabArray = app.allNotes;
-    [self.myTableView1 reloadData];
+    [self.view endEditing:YES];
     
     
-    if ([tabArray count]==0)
-    {
-        self.myTableView1.hidden=YES;
-        
-    }
-    else
-    {
-        
-        self.myTableView1.hidden=NO;
-        self.tapToCreate.hidden=YES;
-        self.noteImage.hidden=YES;
-        self.itsAllAboutNotesLabel.hidden=YES;
-        self.tapToCreateView.hidden=YES;
-    }
+    homeTableArray=[[NSMutableArray alloc]init];
+    [_myTableView1 reloadData];
     
-
+    
+    [self showWholeInfooftable];
+    
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,17 +153,55 @@
 */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     return 1;
+
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tabArray count];
+    
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.labelText = @"Processing data....";
+//    hud.labelColor=[UIColor whiteColor];
+
+    
+    if ([homeTableArray count]==0)
+    {
+        
+        self.myTableView1.hidden=YES;
+        
+        
+    }
+    else
+    {
+        
+        
+       
+        self.myTableView1.hidden=NO;
+        self.tapToCreate.hidden=YES;
+        self.noteImage.hidden=YES;
+        self.itsAllAboutNotesLabel.hidden=YES;
+        self.tapToCreateView.hidden=YES;
+    }
+    
+
+    return [homeTableArray count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+
     HomePageTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"hometabelcell" forIndexPath:indexPath];
-    cModel=[tabArray objectAtIndex:indexPath.row];
-    cell.nameLabel.text=cModel.folderName;
+    hModel=[homeTableArray objectAtIndex:indexPath.row];
+    cell.nameLabel.text=hModel.folderName;
+    
+    
+   
+    
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = v;
+    
     return cell;
 }
 
@@ -160,21 +211,123 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    [self performSegueWithIdentifier:@"notesDetail11" sender:indexPath];
+    [self performSegueWithIdentifier:@"note" sender:indexPath];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"notesDetail11"])
+    if ([segue.identifier isEqualToString:@"note"])
     {
         indexpath=sender;
+        hModel = homeTableArray[indexpath.row];
         NotesDetail *nt=segue.destinationViewController;
-        AppDelegate *appDel=[UIApplication sharedApplication].delegate;
-        appDel.allfile=[[NSMutableArray alloc]init];
-        FolderModelData *model=appDel.allNotes[indexpath.row];
-        NSLog(@"%@,%@,%@",model.folderName,model.titleName,model.textName);
-        nt.nModel=[appDel.allNotes objectAtIndex:indexpath.row];
+        nt.foldername = hModel.folderName;
     }
 }
+
+//Editing table cell data
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    [_myTableView1 setEditing:editing animated:YES];
+    if (editing)
+    {
+      
+    } else {
+//        addButton.enabled = YES;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        
+    
+        if ([homeTableArray count]==0)
+        {
+           
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Warning !!"
+                                                  message:@"Do you want to delete this Folder"
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *cancelAction = [UIAlertAction
+                                           actionWithTitle:NSLocalizedString(@"NO", @"No action")
+                                           style:UIAlertActionStyleCancel
+                                           handler:^(UIAlertAction *action)
+                                           {
+                                               NSLog(@"Cancel action");
+                                               
+                                           }];
+            
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Yes", @"OK action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           NSLog(@"OK action");
+                                           
+                                          
+                                           
+                                       }];
+            
+            [alertController addAction:okAction];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
+       }
+        else
+        {
+            NSMutableString *mutableString=[[NSMutableString alloc]init];
+//            [mutableString appendString:@"Warning\n"];
+            [mutableString appendString:@"Do you want to delete this folder\n"];
+            [mutableString appendString:@"Folder have some file"];
+            
+            UIAlertController *alertController = [UIAlertController
+                                                  alertControllerWithTitle:@"Warning!"
+                                                  message:mutableString
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *cancelAction = [UIAlertAction
+                                           actionWithTitle:NSLocalizedString(@"No", @"No action")
+                                           style:UIAlertActionStyleCancel
+                                           handler:^(UIAlertAction *action)
+                                           {
+                                               NSLog(@"Cancel action");
+                                               
+                                           }];
+            
+            
+            UIAlertAction *okAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Yes", @"Yes action")
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           NSLog(@"Yes action");
+                                           
+                                        [self deleteFolderName:indexPath];
+                                           
+//                                        [self performSegueWithIdentifier:@"note" sender:indexpath];
+                                          // [self gotoNoteController];
+                                           
+                                       }];
+            
+            [alertController addAction:okAction];
+            [alertController addAction:cancelAction];
+            
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+    
+        }
+    }
+}
+
+
+
+
 - (IBAction)addNoteButtonAction:(UIButton *)sender
 {
     [self performSegueWithIdentifier:@"Add" sender:self];
@@ -196,7 +349,7 @@
        
         popUpVC.delegate = self;
         
-        CGSize contentSize = CGSizeMake(200,150);
+        CGSize contentSize = CGSizeMake(200,130);
         
         popUpVC.preferredContentSize = contentSize;
         
@@ -255,15 +408,99 @@
 {
     
     [popOverController dismissPopoverAnimated:NO];
-    
+
     [self.navigationController popToRootViewControllerAnimated:YES];
 
 }
 
 
+-(void)ChangePasswordAction
+{
+     [popOverController dismissPopoverAnimated:NO];
+     [self performSegueWithIdentifier:@"changePassword" sender:self];
+}
+-(void)AboutUsAction
+{
+     [popOverController dismissPopoverAnimated:NO];
+    [self performSegueWithIdentifier:@"aboutUs" sender:self];
+
+}
+
+
+-(void)showWholeInfooftable
+{
+
+    [self.view endEditing:YES];
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+   NSString *currentUser =  [defaults objectForKey:@"LOGINOBJECTID"];
+    [defaults synchronize];
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Processing data....";
+    hud.labelColor=[UIColor whiteColor];
+    
+   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"FolderData"];
+    [query whereKey:@"CreatedBy" equalTo:currentUser];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [self responseObject:objects];
+               [self.myTableView1 reloadData];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+        else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    }];
 
 
 
 
+}
+-(void)responseObject:(NSArray *)objects
+{
+    for (NSDictionary *dic in objects)
+    {
+        hModel=[[HomeModelData alloc]init];
+        hModel.folderName=dic[@"FolderName"];
+        hModel.fileName=dic[@"FileName"];
+        [homeTableArray addObject:hModel];
+//        [self.myTableView1 reloadData];
+        
+        
+        PFObject *myObject = [objects objectAtIndex:indexpath.row];
+        NSString *FolderObjectId = [myObject objectId];
+        NSLog(@"File object id is %@",FolderObjectId);
+        
+        hModel.FolderObjectId=FolderObjectId;
+        
+            }
+    
+    
 
+    }
+
+
+
+-(void)deleteFolderName:(NSIndexPath *)indexPath
+{
+    hModel=homeTableArray[indexPath.row];
+    [homeTableArray removeObjectAtIndex:indexPath.row];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"FolderData"];
+    [query whereKey:@"FolderName" notEqualTo:hModel.FolderObjectId];
+    
+    PFObject *obj = [query getObjectWithId:hModel.FolderObjectId];
+    NSLog(@"removeObject : %@",obj);
+    [obj deleteInBackground];
+    
+    [_myTableView1 endUpdates];
+    [_myTableView1 reloadData];
+    
+
+    
+}
 @end

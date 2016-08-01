@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FolderModelData.h"
 #import "FileModelData.h"
+#import "HomeModelData.h"
 
 @interface NotesDetail : UIViewController
-@property(strong,nonatomic)FolderModelData *nModel;
-@property(strong,nonatomic)FileModelData *fileModel;
+
+@property(nonatomic,strong)NSString *foldername;
+
 @end

@@ -8,13 +8,26 @@
 
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "SignUp.h"
+#import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 @interface ViewController ()
+{
+    NSString *userNmae;
+    NSString *pasword;
+    __weak IBOutlet UIButton *showPassword;
+}
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 - (IBAction)loginButtonAction:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 - (IBAction)hideKeyPad:(UIControl *)sender;
+
+- (IBAction)forgetPasswordButtonAction:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIView *usernameView;
+@property (weak, nonatomic) IBOutlet UIView *passwordView;
+@property (weak, nonatomic) IBOutlet UIButton *muLogin;
+
 
 @end
 
@@ -22,8 +35,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Hide navigation bar
+    UILongPressGestureRecognizer *gesture=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(showPasswordButtonClick:)];
+    [showPassword addGestureRecognizer:gesture];
     
+//    _userNameTextField.text=nil;
+//    _passwordTextField.text=nil;
+//    
     
 //    //Inside text field image set programatically
 //    UIImage *image1=[UIImage imageNamed:@"envelope32"];
@@ -51,16 +68,21 @@
     
     
     //Text field corner setting
-    _userNameTextField.layer.cornerRadius=5;
-    _userNameTextField.layer.borderWidth=1;
+    _usernameView.layer.cornerRadius=5;
+    _usernameView.layer.borderWidth=1;
     
-    _passwordTextField.layer.cornerRadius=5;
-    _passwordTextField.layer.borderWidth=1;
+    _passwordView.layer.cornerRadius=5;
+    _passwordView.layer.borderWidth=1;
     
     _loginButton.layer.cornerRadius=5;
     _loginButton.layer.borderWidth=1;
     
- }
+    
+    _muLogin.backgroundColor=[UIColor colorWithRed:0.65 green:0.11 blue:0.71 alpha:1.00];
+    _muLogin.layer.cornerRadius=5;
+    _muLogin.layer.borderWidth=1;
+    
+     }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -72,7 +94,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-
+    
+    
+    //Clear the text field when returning from other view controller
+   self.userNameTextField.text=@"";
+   self.passwordTextField.text=@"";
 
 }
 
@@ -88,11 +114,133 @@
 //Login button action
 - (IBAction)loginButtonAction:(UIButton *)sender
 {
-    [self performSegueWithIdentifier:@"homePAge" sender:self];
+    [self.view endEditing:YES];
+    userNmae=_userNameTextField.text;
+    pasword=_passwordTextField.text;
+    
+    
+
+    
+    NSMutableString *mutableString=[[NSMutableString alloc]init];
+    BOOL gotoGo=YES;
+    if (userNmae.length==0)
+    {
+        gotoGo=NO;
+        [mutableString appendString:@"Username is required\n"];
+    }
+    
+    if (pasword.length==0)
+    {
+        gotoGo=NO;
+        [mutableString appendString:@"Password is required"];
+    }
+    
+
+    if (gotoGo)
+    {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Authentication....";
+        hud.labelColor=[UIColor whiteColor];
+
+        
+        
+        
+        
+        [PFUser logInWithUsernameInBackground:userNmae password:pasword
+    block:^(PFUser *user, NSError *error) {
+        if (user)
+        {
+            NSString *LoginObjectId=user.objectId;
+            NSLog(@"%@",LoginObjectId);
+            
+           
+            
+            
+            NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+            [defaults setObject:LoginObjectId forKey:@"LOGINOBJECTID"];
+            [defaults synchronize];
+            
+            
+            
+            [hud hide:YES];
+             [self performSegueWithIdentifier:@"homePAge" sender:self];
+        } else
+        {
+           
+            
+            [hud hide:YES];
+            
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Authentication Failed" message:@"Invalid Username or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }];
+        
+       
+    }
+    
+    
+    if ((!gotoGo))
+    {
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Alert!"
+                                              message:mutableString
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                       style:UIAlertActionStyleCancel
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           NSLog(@"Cancel action");
+                                           
+                                       }];
+        
+        
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"OK action");
+                                   }];
+        
+        [alertController addAction:okAction];
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
 }
 
 //Keypad hide
 - (IBAction)endEditing:(id)sender {
     [self.view endEditing:YES];
 }
+
+
+- (void)showPasswordButtonClick:(UIButton *)sender
+{
+    if (self.passwordTextField.secureTextEntry == YES) {
+        
+        self.passwordTextField.secureTextEntry = NO;
+        
+    }
+    
+    else
+    {
+        self.passwordTextField.secureTextEntry = YES;
+    }
+    
+    
+}
+
+- (IBAction)forgetPasswordButtonAction:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"forget" sender:self];
+}
+
+
 @end

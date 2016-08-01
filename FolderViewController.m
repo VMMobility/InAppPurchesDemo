@@ -11,6 +11,11 @@
 #import "HomePage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "ViewController.h"
+#import "SignUp.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
 
 @interface FolderViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UITextViewDelegate,UIAlertViewDelegate>
 {
@@ -19,7 +24,11 @@
     NSString *folder1;
     NSString *title1;
     NSString *text1;
+    UIImage *img1;
     FolderModelData *cModel;
+    
+   
+    
 }
 - (IBAction)attachmentButtonAction:(UIButton *)sender;
 - (IBAction)homeBackButtonAction:(UIButton *)sender;
@@ -38,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *fileNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *textViewField;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *uploadImage;
 
 @end
 
@@ -84,16 +94,10 @@
     _textViewField.layer.cornerRadius=5;
     _textViewField.layer.borderWidth=1;
     _textViewField.layer.borderColor=([UIColor colorWithRed:0.22 green:0.59 blue:0.85 alpha:1.0].CGColor);
-    
-    AppDelegate *appDel = [UIApplication sharedApplication].delegate;
-
-    if (appDel.allNotes == nil)
-    {
-        tabArray=[[NSMutableArray alloc]init];
-    }else
-    {
-        tabArray = appDel.allNotes;
-    }
+//    
+//    AppDelegate *appDel = [UIApplication sharedApplication].delegate;
+//           tabArray=[[NSMutableArray alloc]init];
+//        [tabArray addObjectsFromArray: appDel.allNotes];
     
 //    _folder.layer.cornerRadius=5;
 //    _folder.layer.borderWidth=1;
@@ -107,7 +111,13 @@
 
     // Do any additional setup after loading the view.
 }
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+      [self.view endEditing:YES];
+    [_folderNameTextField resignFirstResponder];
+    [_fileNameTextField resignFirstResponder];
+    [_textViewField resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -200,19 +210,6 @@
     [self.view endEditing:YES];
 }
 
-//Save selected image from gallery to any where
-
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-//{
-//    UIImage *image=info[UIImagePickerControllerEditedImage];
-//    self.myImage.image=image;
-//    
-//    //To save the taken photo in a phone library
-//    
-//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//    [picker dismissViewControllerAnimated:YES completion:Nil];
-//    
-//}
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -252,22 +249,6 @@
 
 
 
-//-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-//{
-//    if (actionSheet.tag == 3)
-//    {
-//        NSLog(@"From didDismissWithButtonIndex - Selected from: %@", [actionSheet buttonTitleAtIndex:buttonIndex]);
-//    }
-//}
-//
-//
-//-(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
-//{
-//    if (actionSheet.tag == 3)
-//    {
-//        NSLog(@"From willDismissWithButtonIndex - Selected from: %@", [actionSheet buttonTitleAtIndex:buttonIndex]);
-//    }
-//}
     
 - (IBAction)folderRightBarButtonAction:(UIBarButtonItem *)sender
 {
@@ -275,9 +256,66 @@
 }
 - (IBAction)saveFolderButoonAction:(UIButton *)sender
 {
+    
+    
     folder1=_folderNameTextField.text;
     title1=_fileNameTextField.text;
     text1=_textViewField.text;
+    img1=_uploadImage.image;
+    
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSString *LoginObjectId=[defaults objectForKey:@"LOGINOBJECTID"];
+    [defaults synchronize];
+    
+    
+    
+    
+    //Saving data on Parse for folder
+    PFObject *folderData=[PFObject objectWithClassName:@"FolderData"];
+    folderData[@"FolderName"]=folder1;
+    folderData[@"CreatedBy"]=LoginObjectId;
+   
+    
+    
+    
+    
+    
+    NSUserDefaults *defaults1=[NSUserDefaults standardUserDefaults];
+    NSString *LoginObjectId1=[defaults1 objectForKey:@"LOGINOBJECTID"];
+    [defaults1 synchronize];
+   
+    PFObject *fileData=[PFObject objectWithClassName:@"FileData"];
+    fileData[@"Parent"]=folder1;
+    fileData[@"FileName"]=title1;
+    fileData[@"FileContent"]=text1;
+    fileData[@"CreatedBy"]=LoginObjectId1;
+   // fileData[@"FileImage"]=img1;
+    [fileData saveInBackground];
+    
+ 
+   if (img1)
+    {
+        NSData *imageData=UIImagePNGRepresentation(img1);
+        PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
+        [imageFile saveInBackground];
+        [fileData setObject:imageFile forKey:@"profilePicture"];
+        [fileData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            
+        if (!error)
+        {
+            //[fileData saveInBackground];
+           
+        }
+
+        }];
+    
+    
+    }
+    
+    
+    
     
     NSMutableString *mutableString=[[NSMutableString alloc]init];
     BOOL goodToGo=YES;
@@ -301,11 +339,49 @@
     
     if (goodToGo)
     {
-    
-         [self localData];
         
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"Your note save successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Saving data....";
+        hud.labelColor=[UIColor whiteColor];
+
+    
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Successfully"
+                                              message:@"Your data have save successfully"
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"OK action");
+                                       
+                                       [folderData saveInBackground];
+                                       [fileData saveInBackground];
+                                       
+
+                                       [self.view endEditing:YES];
+                                       [self.navigationController popViewControllerAnimated:YES];
+                                   }];
+        [alertController addAction:okAction];
+        
+        [self presentViewController:alertController animated:NO completion:nil];
+        
+
+        
+        
+        
+        
+        
+       
+//        [photoData saveInBackground];
+        
+//    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"Your data have save successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+        
+    [hud hide:YES];
+        
     }
 
     if ((!goodToGo))
@@ -313,7 +389,7 @@
         
     
     UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:@"Alert !!"
+                                          alertControllerWithTitle:@"Alert!"
                                           message:mutableString
                                           preferredStyle:UIAlertControllerStyleAlert];
     
@@ -347,41 +423,37 @@
    
 }
 
--(void)localData
-{
-  
-    bModel=[[FolderModelData alloc]init];
-    bModel.folderName=folder1;
-    bModel.titleName=title1;
-    bModel.textName=text1;
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [tabArray addObject:bModel];
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    _uploadImage.image = chosenImage;
     
-    
-    AppDelegate *appDel = [UIApplication sharedApplication].delegate;
-    appDel.allNotes = tabArray;
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
 
-//Alert button action delegate method
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 //{
-// 
-//    
-//[self.navigationController popViewControllerAnimated:YES];
+//    switch (buttonIndex) {
+//        case 0:
+//            [self.view endEditing:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
 //
-//    
+//            break;
+//            
+//        default:
+//            break;
+//    }
 //}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-            [self.navigationController popViewControllerAnimated:YES];
 
-            break;
-            
-        default:
-            break;
-    }
-}
+
 @end

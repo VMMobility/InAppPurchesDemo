@@ -26,12 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    tabImageArray=[[NSArray alloc]init];
-//    tabImageArray=@[@"rubbish12",@"edit46",@"arrow491",@"square236 (1)"];
-    
-//    tabArray=[[NSArray alloc]init];
-//    tabArray=@[@"Delete",@"Edit",@"Change Password",@"Log Out"];
-    
     
     tabArray=[[NSMutableArray alloc]init];
     
@@ -86,12 +80,18 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row==3)
+    if (indexPath.row==2)
     {
         [self.delegate logOutAction];
     }
-    else if(indexPath.row==1)
+   
+    else if (indexPath.row==1)
     {
+        [self.delegate ChangePasswordAction];
+    }
+    else if (indexPath.row==0)
+    {
+        [self.delegate AboutUsAction];
     }
     
     
@@ -99,14 +99,11 @@
 -(void)localData
 {
     aModel=[[PopModelData alloc]init];
-    aModel.nameList=@"Delete";
-    aModel.imageList=[UIImage imageNamed:@"rubbish12 (1)"];
-    [tabArray addObject:aModel];
-    
-    aModel=[[PopModelData alloc]init];
-    aModel.nameList=@"Edit";
+    aModel.nameList=@"About Us";
     aModel.imageList=[UIImage imageNamed:@"edit46 (1)"];
     [tabArray addObject:aModel];
+    
+
     
     aModel=[[PopModelData alloc]init];
     aModel.nameList=@"Change Password";
