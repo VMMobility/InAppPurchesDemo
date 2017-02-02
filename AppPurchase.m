@@ -187,7 +187,8 @@
         NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
     }
     AppPurchaseProductProcess * product = _products[transaction.payment.productIdentifier];
-    [self notifyStatusForProductIdentifier: transaction.payment.productIdentifier string:@"Purchase failed."];
+    [self notifyStatusForProductIdentifier: transaction.payment.
+     productIdentifier string:@"Purchase failed."];
     product.purchaseInProgress = NO;
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
