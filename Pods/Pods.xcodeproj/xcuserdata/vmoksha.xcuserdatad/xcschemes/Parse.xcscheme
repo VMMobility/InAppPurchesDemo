@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '573CC5C7D38420D893A58D1B'
-               BlueprintName = 'Pods-VNote'
+               BlueprintIdentifier = '146D4D3BEC39209E7FD55AD619B9712E'
+               BlueprintName = 'Parse'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-VNote.a'>
+               BuildableName = 'libParse.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

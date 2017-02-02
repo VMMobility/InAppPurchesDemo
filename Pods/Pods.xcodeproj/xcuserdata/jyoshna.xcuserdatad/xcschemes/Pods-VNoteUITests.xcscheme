@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EF2439FE24A2930F9051885A'
-               BlueprintName = 'WYPopoverController'
+               BlueprintIdentifier = 'BC7BBD1A9EE5A80E7CF124B433981A34'
+               BlueprintName = 'Pods-VNoteUITests'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libWYPopoverController.a'>
+               BuildableName = 'libPods-VNoteUITests.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
