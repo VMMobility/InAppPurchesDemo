@@ -7,7 +7,6 @@
 //
 
 #import "ForgetPasswordViewController.h"
-#import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
 
 @interface ForgetPasswordViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
@@ -131,18 +130,9 @@
         
         
         UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Alert !!"
+                                              alertControllerWithTitle:@"Alert!"
                                               message:mutableString
                                               preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-                                       style:UIAlertActionStyleCancel
-                                       handler:^(UIAlertAction *action)
-                                       {
-                                           NSLog(@"Cancel action");
-                                           
-                                       }];
         
         
         UIAlertAction *okAction = [UIAlertAction
@@ -155,7 +145,7 @@
                                    }];
         
         [alertController addAction:okAction];
-        [alertController addAction:cancelAction];
+        
         
         
         [self presentViewController:alertController animated:YES completion:nil];
@@ -228,7 +218,7 @@ UIAlertController *alertControllerSed = [UIAlertController
 {
     
     
-    [PFUser requestPasswordResetForEmailInBackground:email];
+//    [PFUser requestPasswordResetForEmailInBackground:email];
 }
 
 - (IBAction)hideKeypad:(id)sender

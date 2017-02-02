@@ -14,5 +14,7 @@
 @interface NotesDetail : UIViewController
 
 @property(nonatomic,strong)NSString *foldername;
+@property(nonatomic,strong)NSString *filename;
+
 
 @end

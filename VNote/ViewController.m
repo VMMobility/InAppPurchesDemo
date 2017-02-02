@@ -5,85 +5,61 @@
 //  Created by Purushottam Kumar on 06/01/16.
 //  Copyright © 2016 Vmoksha Technologies Pvt Ltd. All rights reserved.
 //
-
+@class AppPurchaseProductProcess;
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SignUp.h"
-#import <Parse/Parse.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-@interface ViewController ()
+#import "AppPurchaseProduct.h"
+#import "AppPurchase.h"
+#import <StoreKit/StoreKit.h>
+#import "HomeTable.h"
+#import "AppPurchaseProductProcess.h"
+#import "BuyAppViewController.h"
+
+@interface ViewController ()<SKProductsRequestDelegate,SKPaymentTransactionObserver,UITableViewDataSource,UITableViewDelegate>
 {
-    NSString *userNmae;
-    NSString *pasword;
-    __weak IBOutlet UIButton *showPassword;
+    
+    NSArray *products;
+    NSNumberFormatter *priceFormatter;
+   
 }
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
-- (IBAction)loginButtonAction:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-- (IBAction)hideKeyPad:(UIControl *)sender;
+@property (weak, nonatomic) IBOutlet UITableView *myHomeTable;
 
-- (IBAction)forgetPasswordButtonAction:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIView *usernameView;
-@property (weak, nonatomic) IBOutlet UIView *passwordView;
-@property (weak, nonatomic) IBOutlet UIButton *muLogin;
 
+- (IBAction)appPurchaseButtonAction:(UIButton *)sender;
+@property (nonatomic, strong) SKProduct * skProduct;
+@property(nonatomic,strong)SKPaymentTransaction *completeTransaction;
+@property (weak, nonatomic) IBOutlet UIImageView *aapImage;
 
 @end
 
 @implementation ViewController
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
+    self.myHomeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     UILongPressGestureRecognizer *gesture=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(showPasswordButtonClick:)];
-    [showPassword addGestureRecognizer:gesture];
-    
-//    _userNameTextField.text=nil;
-//    _passwordTextField.text=nil;
-//    
-    
-//    //Inside text field image set programatically
-//    UIImage *image1=[UIImage imageNamed:@"envelope32"];
-//    UIImageView *imgView=[[UIImageView alloc]initWithImage:image1];
-//    self.userNameTextField.leftView=imgView;
-//    imgView.frame=CGRectMake(0, 2, 15, 15);
-//    self.userNameTextField.leftViewMode= UITextFieldViewModeAlways;
-//    
-//    UIImage *image2=[UIImage imageNamed:@"key21"];
-//    UIImageView *imgView2=[[UIImageView alloc]initWithImage:image2];
-//    imgView2.frame=CGRectMake(0, 2, 15, 15);
-//    self.passwordTextField.leftView = imgView2;
-//    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
-
-    
-    //Gardient color use in background color
-    UIColor *darkColor=[UIColor colorWithRed:0.21 green:0.17 blue:0.13 alpha:1.00];
-    UIColor *lightColor=[UIColor colorWithRed:0.21 green:0.23 blue:0.23 alpha:1.00];
-    
-    CAGradientLayer *gardient=[CAGradientLayer layer];
-    
-    gardient.colors=[NSArray arrayWithObjects:(id)darkColor.CGColor,(id)lightColor.CGColor, nil];
-    gardient.frame=self.view.bounds;
-    [self.view.layer insertSublayer:gardient atIndex:0];
     
     
-    //Text field corner setting
-    _usernameView.layer.cornerRadius=5;
-    _usernameView.layer.borderWidth=1;
-    
-    _passwordView.layer.cornerRadius=5;
-    _passwordView.layer.borderWidth=1;
-    
-    _loginButton.layer.cornerRadius=5;
-    _loginButton.layer.borderWidth=1;
+    priceFormatter=[[NSNumberFormatter alloc]init];
+    [priceFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     
-    _muLogin.backgroundColor=[UIColor colorWithRed:0.65 green:0.11 blue:0.71 alpha:1.00];
-    _muLogin.layer.cornerRadius=5;
-    _muLogin.layer.borderWidth=1;
     
-     }
-
+    UIRefreshControl *refreshControl=[[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(reload)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    [self reload];
+    
+    [refreshControl beginRefreshing];
+    
+    
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
    
@@ -93,153 +69,80 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.title=@"In App Purchase";
+    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.65 green:0.11 blue:0.71 alpha:1.00];    self.navigationItem.hidesBackButton=YES;
     
-    //Clear the text field when returning from other view controller
-   self.userNameTextField.text=@"";
-   self.passwordTextField.text=@"";
-
 }
 
-
-
-
-//Sign up button action
-- (IBAction)signUpButtonAction:(UIButton *)sender
+-(void)reload
 {
-    [self performSegueWithIdentifier:@"signup" sender:self];
+    
+  [self.myHomeTable reloadData];
+    [[AppPurchaseProduct sharedInstance]
+     requestProductsWithCompletionHandler:^(BOOL success, NSArray *product)
+    {
+         if (success)
+         {
+             products=product;
+             
+             [self.myHomeTable reloadData];
+              }
+        
+     }];
 }
 
-//Login button action
-- (IBAction)loginButtonAction:(UIButton *)sender
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [self.view endEditing:YES];
-    userNmae=_userNameTextField.text;
-    pasword=_passwordTextField.text;
-    
-    
-
-    
-    NSMutableString *mutableString=[[NSMutableString alloc]init];
-    BOOL gotoGo=YES;
-    if (userNmae.length==0)
-    {
-        gotoGo=NO;
-        [mutableString appendString:@"Username is required\n"];
-    }
-    
-    if (pasword.length==0)
-    {
-        gotoGo=NO;
-        [mutableString appendString:@"Password is required"];
-    }
-    
-
-    if (gotoGo)
-    {
-        
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Authentication....";
-        hud.labelColor=[UIColor whiteColor];
-
-        
-        
-        
-        
-        [PFUser logInWithUsernameInBackground:userNmae password:pasword
-    block:^(PFUser *user, NSError *error) {
-        if (user)
-        {
-            NSString *LoginObjectId=user.objectId;
-            NSLog(@"%@",LoginObjectId);
-            
-           
-            
-            
-            NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-            [defaults setObject:LoginObjectId forKey:@"LOGINOBJECTID"];
-            [defaults synchronize];
-            
-            
-            
-            [hud hide:YES];
-             [self performSegueWithIdentifier:@"homePAge" sender:self];
-        } else
-        {
-           
-            
-            [hud hide:YES];
-            
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Authentication Failed" message:@"Invalid Username or Password" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    }];
-        
-       
-    }
-    
-    
-    if ((!gotoGo))
-    {
-        
-        UIAlertController *alertController = [UIAlertController
-                                              alertControllerWithTitle:@"Alert!"
-                                              message:mutableString
-                                              preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-                                       style:UIAlertActionStyleCancel
-                                       handler:^(UIAlertAction *action)
-                                       {
-                                           NSLog(@"Cancel action");
-                                           
-                                       }];
-        
-        
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       NSLog(@"OK action");
-                                   }];
-        
-        [alertController addAction:okAction];
-        [alertController addAction:cancelAction];
-        
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-    
+    return 1;
 }
-
-//Keypad hide
-- (IBAction)endEditing:(id)sender {
-    [self.view endEditing:YES];
-}
-
-
-- (void)showPasswordButtonClick:(UIButton *)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.passwordTextField.secureTextEntry == YES) {
-        
-        self.passwordTextField.secureTextEntry = NO;
-        
-    }
+    return [products count];
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    else
-    {
-        self.passwordTextField.secureTextEntry = YES;
-    }
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Processing data....";
+    hud.labelColor=[UIColor whiteColor];
     
+    static NSString *CellIdentifier = @"homeCell";
+    HomeTable *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    AppPurchaseProductProcess *productss=products[indexPath.row];
+    cell.appName.text=productss.skProduct.localizedTitle;
+    cell.appDescription.text=productss.skProduct.localizedDescription;
+    cell.appPrice.text=[priceFormatter stringFromNumber:productss.skProduct.price];
+   // cell.appImage.image = [UIImage imageNamed:productss.info.icon];
     
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = v;
+    
+    self.myHomeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+     [hud hide:YES];
+
+    return cell;
 }
 
-- (IBAction)forgetPasswordButtonAction:(UIButton *)sender
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"forget" sender:self];
+    [self performSegueWithIdentifier:@"buyApp" sender:indexPath];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"buyApp"])
+{
+    
+    BuyAppViewController *detailViewController =(BuyAppViewController *) segue.destinationViewController;
+    NSIndexPath * indexPath = (NSIndexPath *)sender;
+    AppPurchaseProductProcess *product = products[indexPath.row];
+    detailViewController.product = product;
+}
 }
 
 

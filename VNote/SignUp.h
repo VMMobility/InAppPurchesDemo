@@ -12,7 +12,7 @@
 @property(strong,nonatomic)NSString *firstName1;
 @property(strong,nonatomic)NSString *lastName1;
 @property(strong,nonatomic)NSString *userName1;
-@property(strong,nonatomic)NSString *email1;
+//@property(strong,nonatomic)NSString *email1;
 @property(strong,nonatomic)NSString *password1;
 
 

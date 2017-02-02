@@ -8,7 +8,7 @@
 
 #import "ChangePasswordViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import <Parse/Parse.h>
+
 
 @interface ChangePasswordViewController ()
 {
@@ -206,7 +206,7 @@
 
 - (void)sendEmail:(NSString *)email
 {
-    [PFUser requestPasswordResetForEmailInBackground:email];
+//    [PFUser requestPasswordResetForEmailInBackground:email];
 }
 
 

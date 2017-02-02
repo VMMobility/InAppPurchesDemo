@@ -12,6 +12,8 @@
 
 @interface NotesDescriptionViewController : UIViewController
 @property(strong,nonatomic)NotesModelData *descModel;
+@property(strong,nonatomic)NSString *infoText;
+
 
 
 @end

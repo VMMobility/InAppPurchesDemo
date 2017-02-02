@@ -8,7 +8,8 @@
 
 #import "SignUp.h"
 #import <QuartzCore/QuartzCore.h>
-#import <Parse/Parse.h>
+
+
 
 @interface SignUp ()<UIAlertViewDelegate>
 {
@@ -40,6 +41,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+   
+  
     
     
     UIColor *darkColor=[UIColor colorWithRed:0.21 green:0.17 blue:0.13 alpha:1.00];
@@ -156,16 +160,7 @@
                                               alertControllerWithTitle:@"Alert!"
                                               message:mutableString
                                               preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-                                       style:UIAlertActionStyleCancel
-                                       handler:^(UIAlertAction *action)
-                                       {
-                                           NSLog(@"Cancel action");
-                                           
-                                       }];
-        
+              
         
         UIAlertAction *okAction = [UIAlertAction
                                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
@@ -176,7 +171,7 @@
                                    }];
         
         [alertController addAction:okAction];
-        [alertController addAction:cancelAction];
+      
         
         
         [self presentViewController:alertController animated:YES completion:nil];
@@ -206,31 +201,33 @@
     userName=_userNameTextField.text;
     email=_emailTextField.text;
     password=_passwordTextField.text;
-    
-    PFUser *signUp=[PFUser user];
-    signUp.username=userName;
-    signUp.password=password;
-    signUp.email = email;
-
-    signUp[@"FirstNmae"]=firstName;
-    signUp[@"LastName"]=lastName;
+  
+        
    
-
+//    PFUser *signUp=[PFUser user];
+//    signUp.username=userName;
+//    signUp.password=password;
+//    signUp.email = email;
+//
+//    signUp[@"FirstNmae"]=firstName;
+//    signUp[@"LastName"]=lastName;
+//   
+//
     
     
     // other fields can be set just like with PFObject
     
-    [signUp signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error)
-        {
-            // Hooray! Let them use the app now.
-        }
-        else
-        {   NSString *errorString = [error userInfo][@"error"];
-            // Show the errorString somewhere and let the user try again.
-        }
-    }];
-
+//    [signUp signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (!error)
+//        {
+//            // Hooray! Let them use the app now.
+//        }
+//        else
+//        {   NSString *errorString = [error userInfo][@"error"];
+//            // Show the errorString somewhere and let the user try again.
+//        }
+//    }];
+//
 
 
 

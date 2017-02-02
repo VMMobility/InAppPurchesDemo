@@ -11,7 +11,7 @@
 #import "FileModelData.h"
 #import "NotesDetail.h"
 #import "AppDelegate.h"
-#import <Parse/Parse.h>
+
 #import "FolderViewController.h"
 #import "ViewController.h"
 
@@ -268,24 +268,24 @@
     NSString *LoginObjectId=[defaults objectForKey:@"LOGINOBJECTID"];
     [defaults synchronize];
     
-    
-    PFObject *fileData=[PFObject objectWithClassName:@"FileData"];
-    fileData[@"Parent"]=self.currentFoldername;
-    fileData[@"FileName"]=fileName;
-    fileData[@"FileContent"]=textName;
-    fileData[@"CreatedBy"]=LoginObjectId;
-    [fileData saveInBackground];
-    if (imgName)
-    {
-        NSData *imageData=UIImagePNGRepresentation(imgName);
-        PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
-        [imageFile saveInBackground];
-        [fileData setObject:imageFile forKey:@"profilePicture"];
-        [fileData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-            }
-        }];
-}
+//    
+//    PFObject *fileData=[PFObject objectWithClassName:@"FileData"];
+//    fileData[@"Parent"]=self.currentFoldername;
+//    fileData[@"FileName"]=fileName;
+//    fileData[@"FileContent"]=textName;
+//    fileData[@"CreatedBy"]=LoginObjectId;
+//    [fileData saveInBackground];
+//    if (imgName)
+//    {
+//        NSData *imageData=UIImagePNGRepresentation(imgName);
+//        PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
+//        [imageFile saveInBackground];
+//        [fileData setObject:imageFile forKey:@"profilePicture"];
+//        [fileData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//            if (!error) {
+//            }
+//        }];
+//}
 }
 
 

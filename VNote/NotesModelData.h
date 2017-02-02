@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
+
 
 @interface NotesModelData : NSObject
 @property(strong,nonatomic)NSString *fileName;
@@ -16,12 +16,12 @@
 @property(strong,nonatomic)UIImage *imageName;
 @property(strong,nonatomic)NSString *folderName;
 @property(strong,nonatomic)NSString *fileobjectId;
-
+@property(strong,nonatomic)NSString *infoText;
 
 @property(strong,nonatomic)NSData *imagedata;
 
 
-@property(strong,nonatomic)PFFile *imageDataa;
+
 
 
 @end

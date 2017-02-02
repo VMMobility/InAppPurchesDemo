@@ -14,4 +14,5 @@
 @property(strong,nonatomic)NSString *fileContent;
 @property(strong,nonatomic)UIImage *imageName;
 @property(strong,nonatomic)NSString *folderName;
+@property(strong,nonatomic)NSString *infoText;
 @end

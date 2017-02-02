@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-- (IBAction)signUpButtonAction:(UIButton *)sender;
 
+@interface ViewController : UIViewController
 
 @end
 

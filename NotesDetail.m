@@ -15,15 +15,16 @@
 #import "NoteTableViewCell.h"
 #import "FileViewController.h"
 #import "NotesDescriptionViewController.h"
-#import <Parse/Parse.h>
 #import "NotesModelData.h"
 #import "FolderViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <WYPopoverController/WYPopoverController.h>
 #import "NotesPopViewViewController.h"
 #import "NotePopTableCellTableViewCell.h"
+#import "Notes.h"
+#import "NSData+EncryptData.h"
 
-@interface NotesDetail ()<UITableViewDataSource,UITableViewDelegate,popViewControllerDelegate>
+@interface NotesDetail ()<UITableViewDataSource,UITableViewDelegate,popViewControllerDelegate,WYPopoverControllerDelegate>
 {
     UIImage *myImage;
     NSMutableArray *tabArray;
@@ -34,6 +35,8 @@
     NSMutableArray *notesTableArray;
     NotesModelData *noteData;
      WYPopoverController *popOverController;
+    NSMutableArray *fileNameTableArray;
+    
 
 }
 @property (weak, nonatomic) IBOutlet UIView *myLabelView;
@@ -45,97 +48,60 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *folderNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *tapToCreateAgain;
-
+@property(strong,nonatomic)NSMutableArray *notes;
 @end
 
 @implementation NotesDetail
 
-- (void)viewDidLoad {
-   
-     [super viewDidLoad];
-    
-    
-       
-
-    //Gardient color use in background color
+- (void)viewDidLoad
+{
+   [super viewDidLoad];
+ 
     UIColor *darkColor=[UIColor colorWithRed:0.21 green:0.17 blue:0.13 alpha:1.00];
     UIColor *lightColor=[UIColor colorWithRed:0.21 green:0.23 blue:0.23 alpha:1.00];
     
     CAGradientLayer *gardient=[CAGradientLayer layer];
-    
     gardient.colors=[NSArray arrayWithObjects:(id)darkColor.CGColor,(id)lightColor.CGColor, nil];
     gardient.frame=self.view.bounds;
     [self.view.layer insertSublayer:gardient atIndex:0];
     
-     //Set the corner of the view
+    
     _myLabelView.layer.cornerRadius=5;
     _myLabelView.layer.borderWidth=1;
     
-    //Set the title and color
+   
     self.navigationItem.title=@"Notes";
     self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
-    //Hide backBar Button
-     self.navigationItem.hidesBackButton=YES;
-    
+    self.navigationItem.hidesBackButton=YES;
     self.folderNameLabel.text = self.foldername;
-    
-    
     
     myImage = [UIImage imageNamed:@"direction196"];
     UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [myButton setImage:myImage forState:UIControlStateNormal];
     
-    // myButton.showsTouchWhenHighlighted = YES;
+    
     myButton.frame = CGRectMake(10.0, 0.0,24, 24);
-    
-[myButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
-    
+    [myButton addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:myButton];
     self.navigationItem.leftBarButtonItem = leftButton;
-    
-    
-    
     
     myImage = [UIImage imageNamed:@"2016-01-06(1)"];
     UIButton *myButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [myButton1 setImage:myImage forState:UIControlStateNormal];
-    
-    // myButton.showsTouchWhenHighlighted = YES;
-    myButton1.frame = CGRectMake(10.0, 0.0,24, 24);
-    
+     myButton1.frame = CGRectMake(10.0, 0.0,24, 24);
     [myButton1 addTarget:self action:@selector(tapped :) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem *leftButton1 = [[UIBarButtonItem alloc] initWithCustomView:myButton1];
     self.navigationItem.rightBarButtonItem = leftButton1;
-    
-
-   
-
 }
 
-
-
-
-
-
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated
+{
     [self.view endEditing:YES];
 }
 
@@ -143,40 +109,31 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //[tabArray removeAllObjects];
-    
     [self.view endEditing:YES];
+    fileNameTableArray=[[NSMutableArray alloc]init];
     notesTableArray=[[NSMutableArray alloc]init];
-  
-    [self callFileData];
-    
-    
-
+    [self fileNameDataFetching];
+    [self.myTableFileView reloadData];
 }
-
-
-
-
-
 
 - (IBAction)notesBackButton:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)tapped
 {
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    
-    
     if ([notesTableArray count]==0)
     {
         self.myTableFileView.hidden=YES;
@@ -191,9 +148,9 @@
     }
 
     return[notesTableArray count];
-
-
 }
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -207,7 +164,6 @@
   
     
     [hud hide:YES];
-    
     UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = v;
@@ -216,9 +172,6 @@
      return cell;
 }
 
-
-
-//Editing table cell data
 -(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
@@ -232,15 +185,18 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         
-//            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Warning !!" message:@"Do you want to delete this file" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
-//            [alert show];
-//       
-    
         UIAlertController *alertController = [UIAlertController
                                               alertControllerWithTitle:@"Warning!"
                                               message:@"Do you want to delete this file"
@@ -252,7 +208,7 @@
                                        handler:^(UIAlertAction *action)
                                        {
                                            NSLog(@"NO action");
-                                           
+                                           [self.myTableFileView reloadData];
                                        }];
         
         
@@ -262,12 +218,8 @@
                                    handler:^(UIAlertAction *action)
                                    {
                                        NSLog(@"YES action");
-                                   
-                                       [self deletRowwithobjectId:indexPath];
-                                       
-                                       
-                                      
-                                   }];
+                                       [self deleteFileName:indexPath];
+                                    }];
         
         [alertController addAction:okAction];
         [alertController addAction:cancelAction];
@@ -278,13 +230,7 @@
         {
       
         }
-        
-    
     }
-
-
-    
-
 
 - (IBAction)addFileButtonClick:(UIButton *)sender
 {
@@ -294,7 +240,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     if ([segue.identifier isEqualToString:@"notesDesc"])
     {
         
@@ -311,87 +256,12 @@ if ([segue.identifier isEqualToString:@"file"])
     file.currentFoldername = self.foldername;
 
 }
-
-
-
-
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"notesDesc" sender:indexPath];
 }
-
--(void)callFileData
-{
-
-    PFQuery *query = [PFQuery queryWithClassName:@"FileData"];
-    [query whereKey:@"Parent" equalTo:_foldername];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            NSLog(@"%@",objects);
-            [self responseObject:objects];
-            [_myTableFileView reloadData];
-              } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-        
-    }];
-  
-  
-}
--(void)responseObject:(NSArray *)objects
-{
-    for (NSDictionary *dict in objects)
-    {
-        noteData=[[NotesModelData alloc]init];
-        noteData.fileName=dict[@"FileName"];
-        noteData.fileContent=dict[@"FileContent"];
-        noteData.imageDataa = dict[@"profilePicture"];
-        noteData.folderName = dict[@"Parent"];
-        PFObject *myObject1 = [objects objectAtIndex:indexpath.row];
-        NSString *FileobjectId = [myObject1 objectId];
-        NSLog(@"File object id is %@",FileobjectId);
-        noteData.fileobjectId=FileobjectId;
-        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-        [defaults setObject:FileobjectId forKey:@"FILEOBJECTID"];
-        [defaults synchronize];
-        [notesTableArray addObject:noteData];
-    }
-
-//    [self.myTableFileView reloadData];
-
-}
-
-
-
-
-
-
-
-
-
-
--(void)deletRowwithobjectId:(NSIndexPath *)indexPath
-{
-   
-   noteData = notesTableArray[indexPath.row];
-      [notesTableArray removeObjectAtIndex:indexPath.row];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"FileData"];
-    [query whereKey:@"FileName" notEqualTo:noteData.fileobjectId];
-    
-    PFObject *obj = [query getObjectWithId:noteData.fileobjectId];
-    NSLog(@"removeObject : %@",obj);
-    [obj deleteInBackground];
-    [_myTableFileView endUpdates];
-    [_myTableFileView reloadData];
-    
-    
-}
-
-
 
 -(void)tapped:(UIButton*)sender
 {
@@ -401,46 +271,25 @@ if ([segue.identifier isEqualToString:@"file"])
     if (popOverController == nil)
     {
         NotesPopViewViewController  *popUpVC = [self.storyboard instantiateViewControllerWithIdentifier:@"notesPop"];
-        
         popUpVC.delegate = self;
-        
         CGSize contentSize = CGSizeMake(200,80);
-        
         popUpVC.preferredContentSize = contentSize;
-        
-        
-        
         popOverController = [[WYPopoverController alloc] initWithContentViewController:popUpVC];
         popOverController.delegate = self;
         popOverController.passthroughViews = @[btn];
-        
-        
-        //        popOverController.popoverLayoutMargins = UIEdgeInsetsMake(CGFloat top, <#CGFloat left#>, <#CGFloat bottom#>, <#CGFloat right#>)
-        
         popOverController.popoverLayoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
-        
-        
         popOverController.theme = [WYPopoverTheme themeForIOS7];
         popOverController.theme.outerCornerRadius = 2;
-        
-        
         popOverController.theme.borderWidth = 2;
         popOverController.theme.outerStrokeColor = [UIColor lightGrayColor];
-        
-        //        popOverController.theme.innerStrokeColor = [UIColor redColor];
-        
-        
         popOverController.theme.arrowHeight = 8;
         popOverController.theme.arrowBase= 15;
         popOverController.theme.fillTopColor = [UIColor grayColor];
         popOverController.theme.overlayColor= [UIColor clearColor];
-        
         CGRect biggerBounds = CGRectInset(sender.bounds, -6, -6);
-        
         [popOverController presentPopoverFromRect:biggerBounds inView:sender permittedArrowDirections:(WYPopoverArrowDirectionUp) animated:YES options:(WYPopoverAnimationOptionFadeWithScale)];
-        
-        //        [BlurEffect blurredImageOfView:self.view onBaseView:chatSubMenuVC.view withTintColor:[UIColor whiteColor]];
-    }else
+        }
+    else
     {
         [popOverController dismissPopoverAnimated:YES completion:^{
             popOverController.delegate = nil;
@@ -448,6 +297,7 @@ if ([segue.identifier isEqualToString:@"file"])
         }];
     }
 }
+
 -(BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)popoverController
 {
     return YES;
@@ -471,6 +321,82 @@ if ([segue.identifier isEqualToString:@"file"])
     NSArray *viewController=self.navigationController.viewControllers;
     UIViewController *homeController=viewController[1];
     [self.navigationController popToViewController:homeController animated:YES];
+}
+
+-(void)deleteFileName:(NSIndexPath *)indexPath
+{
+    noteData=[notesTableArray objectAtIndex:indexPath.row];
+    [notesTableArray removeObjectAtIndex:indexPath.row];
+    [_myTableFileView endUpdates];
+    [_myTableFileView reloadData];
+    
+    
+    NSString *strFolder=noteData.folderName;
+    NSString *keyFolder=@"my secret key";
+    NSData *dataFolder = [strFolder dataUsingEncoding:[NSString defaultCStringEncoding]];
+    NSData *encpryptedDataFolder = [dataFolder Encrypt:keyFolder];
+    NSString *encryptedStringFolder = [[NSString alloc] initWithData:encpryptedDataFolder encoding:[NSString defaultCStringEncoding]];
+    
+    
+    NSString *strFile=noteData.fileName;
+    NSString *keyFile=@"my secret key";
+    NSData *dataFile = [strFile dataUsingEncoding:[NSString defaultCStringEncoding]];
+    NSData *encpryptedDataFile = [dataFile Encrypt:keyFile];
+    NSString *encryptedStringFile = [[NSString alloc] initWithData:encpryptedDataFile encoding:[NSString defaultCStringEncoding]];
+    
+
+
+    
+    NSString *path;
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    path=[[paths objectAtIndex:0]stringByAppendingPathComponent:@"Notes"];
+    path=[path stringByAppendingPathComponent:encryptedStringFolder];
+    path=[path stringByAppendingPathComponent:encryptedStringFile];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSError *error;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+    {
+        if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error])
+        {
+            NSLog(@"Delete file error: %@", error);
+        }
+    }
+
+    
+}
+
+
+-(void)fileNameDataFetching
+{
+    NSString *myStr =self.foldername;
+    NSString *key = @"my secret key";
+    NSData *data = [myStr dataUsingEncoding:[NSString defaultCStringEncoding]];
+    NSData *decpryptedData = [data Encrypt:key];
+    NSString *decryptedString = [[NSString alloc] initWithData:decpryptedData encoding:[NSString defaultCStringEncoding]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [[paths objectAtIndex:0]stringByAppendingPathComponent:[NSString stringWithFormat:@"Notes/%@", decryptedString]];
+    
+    fileNameTableArray=[[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsDirectory  error:nil];
+   
+    for (int Count=0; Count<(int)[fileNameTableArray count]; Count++)
+    {
+        NSLog(@"File name %d: %@",(Count+1), [fileNameTableArray objectAtIndex:Count]);
+        
+        noteData=[[NotesModelData alloc]init];
+        noteData.folderName = self.foldername;
+        noteData.fileName=fileNameTableArray[Count];
+        
+        NSString *myString =noteData.fileName;
+        NSString *key = @"my secret key";
+        NSData *data = [myString dataUsingEncoding:[NSString defaultCStringEncoding]];
+        NSData *decpryptedData = [data Decrypt:key];
+        NSString *decryptedString = [[NSString alloc] initWithData:decpryptedData encoding:NSASCIIStringEncoding];
+        noteData.fileName=decryptedString;
+        NSLog(@"Encrypted data:%@",decpryptedData);
+        [notesTableArray addObject:noteData];
+        
+    }
+    [self.myTableFileView reloadData];
 }
 
 @end

@@ -10,5 +10,5 @@
 
 
 @interface FolderViewController : UIViewController
-
+@property(nonatomic,strong)NSManagedObjectModel* managedobject;
 @end

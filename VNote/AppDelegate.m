@@ -1,13 +1,14 @@
 //
 //  AppDelegate.m
-//  VNote
+//  Notes
 //
-//  Created by Purushottam Kumar on 06/01/16.
-//  Copyright © 2016 Vmoksha Technologies Pvt Ltd. All rights reserved.
+//  Created by vmoksha mobility on 8/3/16.
+//  Copyright © 2016 vmoksha mobility. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import <Parse/Parse.h>
+#import "AppPurchaseProduct.h"
+
 
 @interface AppDelegate ()
 
@@ -16,20 +17,15 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    _allNotes=[[NSMutableArray alloc]init];
-//    _allfile=[[NSMutableArray alloc]init];
-//    _tableArr =[[NSMutableArray alloc]init];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     
-    //Parse enable saving data with ApplicationId and clientKey
-    [Parse enableLocalDatastore];
-    [Parse setApplicationId:@"AWnJP75GCyxRzRreZbAasvpCHwPubmxHHnKD1TLj"
-                  clientKey:@"6zU2TzJiIl2j7i2lmAd9Tl55SfxWCX17Ex1eQb6U"];
-
     
-      
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
+   
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [AppPurchaseProduct sharedInstance];
+    
     
     return YES;
 }
@@ -54,6 +50,16 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application's managed object context before the application terminates.
+  
 }
+
+#pragma mark - Core Data stack
+
+- (NSURL *)applicationDocumentsDirectory {
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.vmoksha.Prayer.Notes" in the application's documents directory.
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
 
 @end

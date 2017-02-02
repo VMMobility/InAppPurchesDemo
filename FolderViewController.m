@@ -11,28 +11,31 @@
 #import "HomePage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
-#import <Parse/Parse.h>
 #import "ViewController.h"
 #import "SignUp.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "Notes.h"
+#import "NSData+EncryptData.h"
 
 
 @interface FolderViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UITextViewDelegate,UIAlertViewDelegate>
 {
     NSMutableArray *tabArray;
     FolderModelData *bModel;
-    NSString *folder1;
-    NSString *title1;
-    NSString *text1;
+    NSString *folderName;
+    NSString *fileName;
+    NSString *notesText;
     UIImage *img1;
     FolderModelData *cModel;
-    
-   
+    AppDelegate *app;
+    NSManagedObjectContext *myContext;
     
 }
+
 - (IBAction)attachmentButtonAction:(UIButton *)sender;
 - (IBAction)homeBackButtonAction:(UIButton *)sender;
 - (IBAction)hideKeyPad:(id)sender;
+
 
 
 @property (weak, nonatomic) IBOutlet UIView *folder;
@@ -48,16 +51,20 @@
 @property (weak, nonatomic) IBOutlet UITextView *textViewField;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *uploadImage;
-
 @end
+
 
 @implementation FolderViewController
 {
     UIImagePickerController *picker;
 }
+@synthesize managedobject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    app=[[UIApplication sharedApplication]delegate];
+    myContext=app.managedObjectContext;
     
     
     
@@ -65,23 +72,18 @@
     self.navigationItem.hidesBackButton=YES;
     self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName: [UIColor whiteColor]};
    
-    //Gardient color use in background color
-
     UIColor *darkColor=[UIColor colorWithRed:0.21 green:0.17 blue:0.13 alpha:1.00];
     UIColor *lightColor=[UIColor colorWithRed:0.21 green:0.23 blue:0.23 alpha:1.00];
     
     CAGradientLayer *gardient=[CAGradientLayer layer];
-    
     gardient.colors=[NSArray arrayWithObjects:(id)darkColor.CGColor,(id)lightColor.CGColor, nil];
     gardient.frame=self.view.bounds;
     [self.view.layer insertSublayer:gardient atIndex:0];
     
-    
-    //Set view corner
     _tapToAttachFile.layer.cornerRadius=5;
     _tapToAttachFile.layer.borderWidth=1;
     
-    //Change the text field value color
+ 
     _folderNameTextField.textColor=[UIColor whiteColor];
     _fileNameTextField.textColor=[UIColor whiteColor];
     _textViewField.textColor=[UIColor whiteColor];
@@ -94,22 +96,21 @@
     _textViewField.layer.cornerRadius=5;
     _textViewField.layer.borderWidth=1;
     _textViewField.layer.borderColor=([UIColor colorWithRed:0.22 green:0.59 blue:0.85 alpha:1.0].CGColor);
-//    
-//    AppDelegate *appDel = [UIApplication sharedApplication].delegate;
-//           tabArray=[[NSMutableArray alloc]init];
-//        [tabArray addObjectsFromArray: appDel.allNotes];
-    
-//    _folder.layer.cornerRadius=5;
-//    _folder.layer.borderWidth=1;
-    
-    
-//    _textView.layer.cornerRadius=5;
-//    _textView.layer.borderWidth=1;
-    
-//    _titleView.layer.cornerRadius=5;
-//    _titleView.layer.borderWidth=1;
 
-    // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.view endEditing:YES];
+    Notes *nt=(Notes *)self.managedobject;
+    if (managedobject !=nil)
+    {
+        [self.managedobject valueForKey:@"foldername"];
+        [self.managedobject valueForKey:@"filename"];
+        [self.managedobject valueForKey:@"info"];
+       
+    }
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -118,6 +119,7 @@
     [_fileNameTextField resignFirstResponder];
     [_textViewField resignFirstResponder];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -126,63 +128,26 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-   
-
-    
-            self.placeholderNameLabel.hidden=YES;
-    
+   self.placeholderNameLabel.hidden=YES;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     NSString *strText=self.textViewField.text;
-    
     self.placeholderNameLabel.hidden=YES;
-       
     if (strText.length==0)
     {
         
-        
         self.placeholderNameLabel.hidden=NO;
         [textView addSubview:_placeholderNameLabel];
-        
-
-        
     }
-
-    
-        
-    
-    
 
     return YES;
 }
 
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-//Attachment of image from camera gallery
 - (IBAction)attachmentButtonAction:(UIButton *)sender
 {
-//    UIImagePickerController *picker=[[UIImagePickerController alloc]init];
-//    picker.delegate=self;
-//    picker.allowsEditing=YES;
-//    picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-//    [self presentViewController:picker animated:YES completion:Nil];
-//    
-    
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Attach file from:"
                                                              delegate:self
@@ -198,7 +163,7 @@
     
 }
 
-//Perform custom back button
+
 - (IBAction)homeBackButtonAction:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -256,86 +221,82 @@
 }
 - (IBAction)saveFolderButoonAction:(UIButton *)sender
 {
-    
-    
-    folder1=_folderNameTextField.text;
-    title1=_fileNameTextField.text;
-    text1=_textViewField.text;
+    folderName=_folderNameTextField.text;
+    fileName=_fileNameTextField.text;
+    notesText=_textViewField.text;
     img1=_uploadImage.image;
     
-    
-    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-    NSString *LoginObjectId=[defaults objectForKey:@"LOGINOBJECTID"];
-    [defaults synchronize];
-    
-    
+    NSString *myString =folderName;
+    NSString *key = @"my secret key";
+    NSData *data = [myString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *encryptedData = [data Encrypt:key];
     
     
-    //Saving data on Parse for folder
-    PFObject *folderData=[PFObject objectWithClassName:@"FolderData"];
-    folderData[@"FolderName"]=folder1;
-    folderData[@"CreatedBy"]=LoginObjectId;
+    NSString *myString2=fileName;
+    NSString *key2=@"my secret key";
+    NSData *data2=[myString2 dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *encryptedData2=[data2 Encrypt:key2];
+    
+    
+    NSString *myString3=notesText;
+    NSString *key3=@"my secret key";
+    NSData *data3=[myString3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *encryptedData3=[data3 Encrypt:key3];
+    
+    NSArray *path2 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,
+                                                         YES);
+    NSString *documentsPath = [path2 objectAtIndex:0];
+    NSString *myPath = [documentsPath stringByAppendingPathComponent:@"/Notes"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:myPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:myPath withIntermediateDirectories:NO
+                                                   attributes:nil error:NULL];
+  
    
+    NSString *newStr = [[NSString alloc] initWithData:encryptedData encoding:[NSString defaultCStringEncoding]];
+    NSLog(@"new str:%@",newStr);
+    NSLog(@"Encrypted data:%@",encryptedData);
     
     
-    
-    
-    
-    NSUserDefaults *defaults1=[NSUserDefaults standardUserDefaults];
-    NSString *LoginObjectId1=[defaults1 objectForKey:@"LOGINOBJECTID"];
-    [defaults1 synchronize];
-   
-    PFObject *fileData=[PFObject objectWithClassName:@"FileData"];
-    fileData[@"Parent"]=folder1;
-    fileData[@"FileName"]=title1;
-    fileData[@"FileContent"]=text1;
-    fileData[@"CreatedBy"]=LoginObjectId1;
-   // fileData[@"FileImage"]=img1;
-    [fileData saveInBackground];
-    
- 
-   if (img1)
-    {
-        NSData *imageData=UIImagePNGRepresentation(img1);
-        PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
-        [imageFile saveInBackground];
-        [fileData setObject:imageFile forKey:@"profilePicture"];
-        [fileData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-        {
-            
-        if (!error)
-        {
-            //[fileData saveInBackground];
-           
-        }
+    NSString *myString4=newStr;
+    NSString *key4=@"my secret key";
+//    NSData *data4=[myString4 dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *data4 = [myString4 dataUsingEncoding:[NSString defaultCStringEncoding]];
 
-        }];
+    NSData *decrptedData=[data4 Decrypt:key4];
+    NSString *decryptFolderName = [[NSString alloc] initWithData:decrptedData encoding:NSASCIIStringEncoding];
+    NSLog(@"%@",decryptFolderName);
+    
+    NSString *folderPath = [myPath stringByAppendingPathComponent:newStr];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO
+                                                   attributes:nil error:NULL];
+    NSString *newStr2=[[NSString alloc] initWithData:encryptedData2 encoding:[NSString defaultCStringEncoding]];
+    NSString *pathFileName = [folderPath stringByAppendingPathComponent:newStr2];
     
     
-    }
-    
-    
-    
+    NSString *newStr3=[[NSString alloc] initWithData:encryptedData3 encoding:[NSString defaultCStringEncoding]];
+    NSString *str=newStr3;
+    NSData *nsData= [str dataUsingEncoding:NSUTF8StringEncoding];
+    [nsData writeToFile:pathFileName atomically:YES];
     
     NSMutableString *mutableString=[[NSMutableString alloc]init];
     BOOL goodToGo=YES;
-    if (folder1.length==0)
+    if (folderName.length==0)
     {
         goodToGo=NO;
         [mutableString appendString:@"Folder name is required\n"];
     }
     
-    if (title1.length==0)
+    if (fileName.length==0)
     {
          goodToGo=NO;
          [mutableString appendString:@"File name is required\n"];
     }
-        if(text1.length==0)
+        if(notesText.length==0)
     {
          goodToGo=NO;
          [mutableString appendString:@"Enter the text"];
     }
-    
     
     if (goodToGo)
     {
@@ -345,7 +306,6 @@
         hud.labelColor=[UIColor whiteColor];
 
     
-        
         UIAlertController *alertController = [UIAlertController
                                               alertControllerWithTitle:@"Successfully"
                                               message:@"Your data have save successfully"
@@ -357,52 +317,25 @@
                                    {
                                        NSLog(@"OK action");
                                        
-                                       [folderData saveInBackground];
-                                       [fileData saveInBackground];
-                                       
-
-                                       [self.view endEditing:YES];
+                                        [self.view endEditing:YES];
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }];
+        
         [alertController addAction:okAction];
-        
         [self presentViewController:alertController animated:NO completion:nil];
-        
-
-        
-        
-        
-        
-        
-       
-//        [photoData saveInBackground];
-        
-//    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Successfully !!" message:@"Your data have save successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-        
-    [hud hide:YES];
-        
-    }
+        [hud hide:YES];
+}
 
     if ((!goodToGo))
     {
         
     
-    UIAlertController *alertController = [UIAlertController
+        UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"Alert!"
                                           message:mutableString
                                           preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-                                   style:UIAlertActionStyleCancel
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       NSLog(@"Cancel action");
-         
-                                   }];
-        
-        
+   
         UIAlertAction *okAction = [UIAlertAction
                                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
                                    style:UIAlertActionStyleDefault
@@ -411,24 +344,18 @@
                                        NSLog(@"OK action");
                                    }];
 
-    [alertController addAction:okAction];
-    [alertController addAction:cancelAction];
-    
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+       [alertController addAction:okAction];
+       [self presentViewController:alertController animated:YES completion:nil];
     
     }
-
-    
-   
 }
 
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     _uploadImage.image = chosenImage;
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -437,23 +364,7 @@
 {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
 }
-
-
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    switch (buttonIndex) {
-//        case 0:
-//            [self.view endEditing:YES];
-//            [self.navigationController popViewControllerAnimated:YES];
-//
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//}
 
 
 @end

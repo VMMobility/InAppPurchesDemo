@@ -7,21 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D7B2F4638962959389DF9B1 /* libPods-VNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCF7C3C9677B46A15DC2F99 /* libPods-VNote.a */; };
-		C32081611C44D7D80056E470 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32081601C44D7D80056E470 /* PopViewController.m */; };
-		C32081651C44DD0A0056E470 /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32081641C44DD0A0056E470 /* PopTableViewCell.m */; };
-		C32081681C4508560056E470 /* PopModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32081671C4508560056E470 /* PopModelData.m */; };
-		C322BE571C439AFA0092FA9C /* NotesDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C322BE561C439AFA0092FA9C /* NotesDescriptionViewController.m */; };
-		C3285D5D1C3E255B00EFDBC1 /* HomePageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */; };
-		C3285D611C3E3EFB00EFDBC1 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3285D601C3E3EFB00EFDBC1 /* FolderViewController.m */; };
-		C32945621C5F2EA40003DCA1 /* NotesDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */; };
-		C32945651C5F31500003DCA1 /* NotesDetailPopViewModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */; };
-		C32945681C5F36870003DCA1 /* notesDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */; };
-		C329456B1C5F519F0003DCA1 /* NotesPopViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */; };
-		C329456E1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */; };
-		C32945711C5F54510003DCA1 /* notesPopModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32945701C5F54510003DCA1 /* notesPopModelData.m */; };
-		C32E10C01C3F777E007C6CB2 /* FolderModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C32E10BF1C3F777E007C6CB2 /* FolderModelData.m */; };
-		C32E10C61C3FD448007C6CB2 /* NotesDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = C32E10C51C3FD448007C6CB2 /* NotesDetail.m */; };
+		0B68A9F64E378BDA4BFDCF10 /* libPods-VNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B57982BA149561F45514EC1 /* libPods-VNote.a */; };
+		519B5DF01E3F364500A3B2DF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 519B5DED1E3F364500A3B2DF /* NSData+Base64.m */; };
+		519B5DF11E3F364500A3B2DF /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519B5DEF1E3F364500A3B2DF /* VerificationController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		548D9A47CAEA548B83E3A149 /* libPods-VNoteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE847A1BE9F1A59F65C83914 /* libPods-VNoteTests.a */; };
+		70F250B260E334D4ACA56DB0 /* libPods-VNoteUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB238E5B97BE3F325F79916B /* libPods-VNoteUITests.a */; };
+		8626C6AB1DAE365D0034D8ED /* FlashviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8626C6AA1DAE365D0034D8ED /* FlashviewController.m */; };
 		C32FF5C01C3CD9F500953F56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5BF1C3CD9F500953F56 /* main.m */; };
 		C32FF5C31C3CD9F500953F56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5C21C3CD9F500953F56 /* AppDelegate.m */; };
 		C32FF5C61C3CD9F500953F56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5C51C3CD9F500953F56 /* ViewController.m */; };
@@ -30,18 +21,22 @@
 		C32FF5CE1C3CD9F500953F56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32FF5CC1C3CD9F500953F56 /* LaunchScreen.storyboard */; };
 		C32FF5D91C3CD9F500953F56 /* VNoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5D81C3CD9F500953F56 /* VNoteTests.m */; };
 		C32FF5E41C3CD9F500953F56 /* VNoteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5E31C3CD9F500953F56 /* VNoteUITests.m */; };
-		C32FF5F21C3CE18700953F56 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32FF5F11C3CE18700953F56 /* QuartzCore.framework */; };
-		C32FF5F51C3CFC9600953F56 /* SignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5F41C3CFC9600953F56 /* SignUp.m */; };
-		C32FF5F91C3D071500953F56 /* HomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5F81C3D071500953F56 /* HomePage.m */; };
-		C332AF2C1C40C39600C91CB3 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF2B1C40C39600C91CB3 /* NoteTableViewCell.m */; };
-		C332AF2F1C40EE8E00C91CB3 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF2E1C40EE8E00C91CB3 /* FileViewController.m */; };
-		C332AF331C413AAF00C91CB3 /* FileModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C332AF321C413AAF00C91CB3 /* FileModelData.m */; };
-		C334DEAA1C4E062A00B21B6A /* NotesDescriptionModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */; };
-		C341E2B21C4CEB2900B25825 /* HomeModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C341E2B11C4CEB2900B25825 /* HomeModelData.m */; };
-		C341E2B51C4D02CE00B25825 /* NotesModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = C341E2B41C4D02CE00B25825 /* NotesModelData.m */; };
-		C390A4B41C4E5216006EC575 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */; };
-		C3EFE3241C4637B5002702CB /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */; };
-		C3EFE3281C466F44002702CB /* AboutUs.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EFE3271C466F44002702CB /* AboutUs.m */; };
+		CD1F10981D8A78390040B2AE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1F10971D8A78390040B2AE /* StoreKit.framework */; };
+		CD2F4DEC1D92A6BB008098C3 /* HomeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2F4DEB1D92A6BB008098C3 /* HomeTable.m */; };
+		CD2F4DF51D92BBAD008098C3 /* BuyAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2F4DF41D92BBAD008098C3 /* BuyAppViewController.m */; };
+		CD3BACFC1D50866E00F897AB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BACFB1D50866E00F897AB /* CFNetwork.framework */; };
+		CD3BACFE1D50867C00F897AB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BACFD1D50867C00F897AB /* Security.framework */; };
+		CD3BAD001D50868900F897AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BACFF1D50868900F897AB /* SystemConfiguration.framework */; };
+		CD3BAD021D5086C800F897AB /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BAD011D5086C800F897AB /* libc++.1.tbd */; };
+		CD3BAD041D5086DE00F897AB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BAD031D5086DE00F897AB /* libc++.tbd */; };
+		CD3BAD061D5086EC00F897AB /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BAD051D5086EC00F897AB /* libc++abi.tbd */; };
+		CD4D10FF1D51D1A8005710C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D10FE1D51D1A8005710C9 /* UIKit.framework */; };
+		CD4D11021D51D32C005710C9 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD4D11001D51D32C005710C9 /* Notes.xcdatamodeld */; };
+		CD4D110C1D51DBF4005710C9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D110A1D51DBF4005710C9 /* libsqlite3.0.tbd */; };
+		CD4D110D1D51DBF4005710C9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D110B1D51DBF4005710C9 /* libsqlite3.tbd */; };
+		CD8089CD1D910E8600740900 /* AppPurchaseProductProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8089CC1D910E8600740900 /* AppPurchaseProductProcess.m */; };
+		CDBA7B791D8FB15A0034D72E /* AppPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA7B781D8FB15A0034D72E /* AppPurchase.m */; };
+		CDBA7B851D8FC4630034D72E /* AppPurchaseProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,36 +57,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03E36478158EA4C182C43839 /* Pods-VNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.debug.xcconfig"; sourceTree = "<group>"; };
-		367CF9B1B905EDBF6089A525 /* Pods-VNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.release.xcconfig"; sourceTree = "<group>"; };
-		C320815F1C44D7D80056E470 /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
-		C32081601C44D7D80056E470 /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
-		C32081631C44DD0A0056E470 /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
-		C32081641C44DD0A0056E470 /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
-		C32081661C4508560056E470 /* PopModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopModelData.h; sourceTree = "<group>"; };
-		C32081671C4508560056E470 /* PopModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopModelData.m; sourceTree = "<group>"; };
-		C322BE551C439AFA0092FA9C /* NotesDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDescriptionViewController.h; sourceTree = "<group>"; };
-		C322BE561C439AFA0092FA9C /* NotesDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDescriptionViewController.m; sourceTree = "<group>"; };
-		C3285D5B1C3E255B00EFDBC1 /* HomePageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageTableViewCell.h; path = ../HomePageTableViewCell.h; sourceTree = "<group>"; };
-		C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageTableViewCell.m; path = ../HomePageTableViewCell.m; sourceTree = "<group>"; };
-		C3285D5F1C3E3EFB00EFDBC1 /* FolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
-		C3285D601C3E3EFB00EFDBC1 /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
-		C32945601C5F2EA40003DCA1 /* NotesDetailPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailPopView.h; sourceTree = "<group>"; };
-		C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailPopView.m; sourceTree = "<group>"; };
-		C32945631C5F31500003DCA1 /* NotesDetailPopViewModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailPopViewModelData.h; sourceTree = "<group>"; };
-		C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailPopViewModelData.m; sourceTree = "<group>"; };
-		C32945661C5F36870003DCA1 /* notesDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesDetailTableViewCell.h; sourceTree = "<group>"; };
-		C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesDetailTableViewCell.m; sourceTree = "<group>"; };
-		C32945691C5F519F0003DCA1 /* NotesPopViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesPopViewViewController.h; sourceTree = "<group>"; };
-		C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesPopViewViewController.m; sourceTree = "<group>"; };
-		C329456C1C5F52090003DCA1 /* NotePopTableCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePopTableCellTableViewCell.h; sourceTree = "<group>"; };
-		C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePopTableCellTableViewCell.m; sourceTree = "<group>"; };
-		C329456F1C5F54510003DCA1 /* notesPopModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesPopModelData.h; sourceTree = "<group>"; };
-		C32945701C5F54510003DCA1 /* notesPopModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesPopModelData.m; sourceTree = "<group>"; };
-		C32E10BE1C3F777E007C6CB2 /* FolderModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderModelData.h; sourceTree = "<group>"; };
-		C32E10BF1C3F777E007C6CB2 /* FolderModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderModelData.m; sourceTree = "<group>"; };
-		C32E10C41C3FD448007C6CB2 /* NotesDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesDetail.h; path = ../NotesDetail.h; sourceTree = "<group>"; };
-		C32E10C51C3FD448007C6CB2 /* NotesDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesDetail.m; path = ../NotesDetail.m; sourceTree = "<group>"; };
+		2B57982BA149561F45514EC1 /* libPods-VNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		357528627AAFA936B372BC0C /* Pods-VNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.debug.xcconfig"; sourceTree = "<group>"; };
+		519B5DEC1E3F364500A3B2DF /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		519B5DED1E3F364500A3B2DF /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		519B5DEE1E3F364500A3B2DF /* VerificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationController.h; sourceTree = "<group>"; };
+		519B5DEF1E3F364500A3B2DF /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
+		5A428380DF8F620E39B78403 /* Pods-VNoteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6277A8F352ED24176A31DAD5 /* Pods-VNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8626C6A91DAE365D0034D8ED /* FlashviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashviewController.h; sourceTree = "<group>"; };
+		8626C6AA1DAE365D0034D8ED /* FlashviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashviewController.m; sourceTree = "<group>"; };
+		9316962FD08017221A3CBBCD /* Pods-VNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests.release.xcconfig"; sourceTree = "<group>"; };
+		A05AB8EF2304B934F1358C41 /* Pods-VNoteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB238E5B97BE3F325F79916B /* libPods-VNoteUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNoteUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE847A1BE9F1A59F65C83914 /* libPods-VNoteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNoteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32FF5BB1C3CD9F400953F56 /* VNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32FF5BF1C3CD9F500953F56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C32FF5C11C3CD9F500953F56 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,30 +87,29 @@
 		C32FF5DF1C3CD9F500953F56 /* VNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32FF5E31C3CD9F500953F56 /* VNoteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VNoteUITests.m; sourceTree = "<group>"; };
 		C32FF5E51C3CD9F500953F56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C32FF5F11C3CE18700953F56 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C32FF5F31C3CFC9600953F56 /* SignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUp.h; sourceTree = "<group>"; };
-		C32FF5F41C3CFC9600953F56 /* SignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp.m; sourceTree = "<group>"; };
-		C32FF5F71C3D071500953F56 /* HomePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePage.h; sourceTree = "<group>"; };
-		C32FF5F81C3D071500953F56 /* HomePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePage.m; sourceTree = "<group>"; };
-		C332AF2A1C40C39600C91CB3 /* NoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteTableViewCell.h; sourceTree = "<group>"; };
-		C332AF2B1C40C39600C91CB3 /* NoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTableViewCell.m; sourceTree = "<group>"; };
-		C332AF2D1C40EE8E00C91CB3 /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
-		C332AF2E1C40EE8E00C91CB3 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
-		C332AF311C413AAF00C91CB3 /* FileModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileModelData.h; path = VNote/FileModelData.h; sourceTree = "<group>"; };
-		C332AF321C413AAF00C91CB3 /* FileModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileModelData.m; path = VNote/FileModelData.m; sourceTree = "<group>"; };
-		C334DEA81C4E062A00B21B6A /* NotesDescriptionModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDescriptionModelData.h; sourceTree = "<group>"; };
-		C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDescriptionModelData.m; sourceTree = "<group>"; };
-		C341E2B01C4CEB2900B25825 /* HomeModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModelData.h; sourceTree = "<group>"; };
-		C341E2B11C4CEB2900B25825 /* HomeModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModelData.m; sourceTree = "<group>"; };
-		C341E2B31C4D02CE00B25825 /* NotesModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesModelData.h; sourceTree = "<group>"; };
-		C341E2B41C4D02CE00B25825 /* NotesModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesModelData.m; sourceTree = "<group>"; };
-		C390A4B21C4E5216006EC575 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordViewController.h; path = ../ForgetPasswordViewController.h; sourceTree = "<group>"; };
-		C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordViewController.m; path = ../ForgetPasswordViewController.m; sourceTree = "<group>"; };
-		C3EFE3221C4637B5002702CB /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
-		C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
-		C3EFE3261C466F44002702CB /* AboutUs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUs.h; sourceTree = "<group>"; };
-		C3EFE3271C466F44002702CB /* AboutUs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUs.m; sourceTree = "<group>"; };
-		CCCF7C3C9677B46A15DC2F99 /* libPods-VNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1F10971D8A78390040B2AE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CD2B8CA81D81A42600E125B3 /* VNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VNote.entitlements; sourceTree = "<group>"; };
+		CD2F4DEA1D92A6BB008098C3 /* HomeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTable.h; sourceTree = "<group>"; };
+		CD2F4DEB1D92A6BB008098C3 /* HomeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTable.m; sourceTree = "<group>"; };
+		CD2F4DF31D92BBAD008098C3 /* BuyAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyAppViewController.h; sourceTree = "<group>"; };
+		CD2F4DF41D92BBAD008098C3 /* BuyAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyAppViewController.m; sourceTree = "<group>"; };
+		CD3BACFB1D50866E00F897AB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CD3BACFD1D50867C00F897AB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CD3BACFF1D50868900F897AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CD3BAD011D5086C800F897AB /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		CD3BAD031D5086DE00F897AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CD3BAD051D5086EC00F897AB /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		CD4D10FE1D51D1A8005710C9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD4D11011D51D32C005710C9 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
+		CD4D110A1D51DBF4005710C9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		CD4D110B1D51DBF4005710C9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CD8089CB1D910E8600740900 /* AppPurchaseProductProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchaseProductProcess.h; sourceTree = "<group>"; };
+		CD8089CC1D910E8600740900 /* AppPurchaseProductProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchaseProductProcess.m; sourceTree = "<group>"; };
+		CDBA7B771D8FB15A0034D72E /* AppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchase.h; sourceTree = "<group>"; };
+		CDBA7B781D8FB15A0034D72E /* AppPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchase.m; sourceTree = "<group>"; };
+		CDBA7B831D8FC4630034D72E /* AppPurchaseProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchaseProduct.h; sourceTree = "<group>"; };
+		CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchaseProduct.m; sourceTree = "<group>"; };
+		E92319ABFED2210CF2152788 /* Pods-VNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +117,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C32FF5F21C3CE18700953F56 /* QuartzCore.framework in Frameworks */,
-				9D7B2F4638962959389DF9B1 /* libPods-VNote.a in Frameworks */,
+				CD1F10981D8A78390040B2AE /* StoreKit.framework in Frameworks */,
+				CD4D110C1D51DBF4005710C9 /* libsqlite3.0.tbd in Frameworks */,
+				CD4D110D1D51DBF4005710C9 /* libsqlite3.tbd in Frameworks */,
+				CD4D10FF1D51D1A8005710C9 /* UIKit.framework in Frameworks */,
+				CD3BAD061D5086EC00F897AB /* libc++abi.tbd in Frameworks */,
+				CD3BAD041D5086DE00F897AB /* libc++.tbd in Frameworks */,
+				CD3BAD021D5086C800F897AB /* libc++.1.tbd in Frameworks */,
+				CD3BAD001D50868900F897AB /* SystemConfiguration.framework in Frameworks */,
+				CD3BACFE1D50867C00F897AB /* Security.framework in Frameworks */,
+				CD3BACFC1D50866E00F897AB /* CFNetwork.framework in Frameworks */,
+				0B68A9F64E378BDA4BFDCF10 /* libPods-VNote.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				548D9A47CAEA548B83E3A149 /* libPods-VNoteTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,57 +143,54 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70F250B260E334D4ACA56DB0 /* libPods-VNoteUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		518CBAEAB0178B97EA514C7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				357528627AAFA936B372BC0C /* Pods-VNote.debug.xcconfig */,
+				E92319ABFED2210CF2152788 /* Pods-VNote.release.xcconfig */,
+				6277A8F352ED24176A31DAD5 /* Pods-VNoteTests.debug.xcconfig */,
+				9316962FD08017221A3CBBCD /* Pods-VNoteTests.release.xcconfig */,
+				A05AB8EF2304B934F1358C41 /* Pods-VNoteUITests.debug.xcconfig */,
+				5A428380DF8F620E39B78403 /* Pods-VNoteUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		519B5DDF1E3F1D0D00A3B2DF /* VerifocationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				519B5DEC1E3F364500A3B2DF /* NSData+Base64.h */,
+				519B5DED1E3F364500A3B2DF /* NSData+Base64.m */,
+				519B5DEE1E3F364500A3B2DF /* VerificationController.h */,
+				519B5DEF1E3F364500A3B2DF /* VerificationController.m */,
+			);
+			name = VerifocationViewController;
+			sourceTree = "<group>";
+		};
 		933B827E5B19EBA2F847765F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CCCF7C3C9677B46A15DC2F99 /* libPods-VNote.a */,
+				CD1F10971D8A78390040B2AE /* StoreKit.framework */,
+				CD4D110A1D51DBF4005710C9 /* libsqlite3.0.tbd */,
+				CD4D110B1D51DBF4005710C9 /* libsqlite3.tbd */,
+				CD3BAD051D5086EC00F897AB /* libc++abi.tbd */,
+				CD3BAD031D5086DE00F897AB /* libc++.tbd */,
+				CD3BAD011D5086C800F897AB /* libc++.1.tbd */,
+				CD3BACFF1D50868900F897AB /* SystemConfiguration.framework */,
+				CD3BACFD1D50867C00F897AB /* Security.framework */,
+				CD3BACFB1D50866E00F897AB /* CFNetwork.framework */,
+				2B57982BA149561F45514EC1 /* libPods-VNote.a */,
+				AE847A1BE9F1A59F65C83914 /* libPods-VNoteTests.a */,
+				AB238E5B97BE3F325F79916B /* libPods-VNoteUITests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C320322F1C5633DA00680624 /* ForgetPassword */ = {
-			isa = PBXGroup;
-			children = (
-				C390A4B21C4E5216006EC575 /* ForgetPasswordViewController.h */,
-				C390A4B31C4E5216006EC575 /* ForgetPasswordViewController.m */,
-			);
-			name = ForgetPassword;
-			sourceTree = "<group>";
-		};
-		C32081621C44DCE20056E470 /* PopView */ = {
-			isa = PBXGroup;
-			children = (
-				C320815F1C44D7D80056E470 /* PopViewController.h */,
-				C32081601C44D7D80056E470 /* PopViewController.m */,
-				C32081631C44DD0A0056E470 /* PopTableViewCell.h */,
-				C32081641C44DD0A0056E470 /* PopTableViewCell.m */,
-				C32081661C4508560056E470 /* PopModelData.h */,
-				C32081671C4508560056E470 /* PopModelData.m */,
-			);
-			name = PopView;
-			sourceTree = "<group>";
-		};
-		C322BE581C439B280092FA9C /* NotesDescription */ = {
-			isa = PBXGroup;
-			children = (
-				C322BE551C439AFA0092FA9C /* NotesDescriptionViewController.h */,
-				C322BE561C439AFA0092FA9C /* NotesDescriptionViewController.m */,
-				C334DEA81C4E062A00B21B6A /* NotesDescriptionModelData.h */,
-				C334DEA91C4E062A00B21B6A /* NotesDescriptionModelData.m */,
-				C32945601C5F2EA40003DCA1 /* NotesDetailPopView.h */,
-				C32945611C5F2EA40003DCA1 /* NotesDetailPopView.m */,
-				C32945631C5F31500003DCA1 /* NotesDetailPopViewModelData.h */,
-				C32945641C5F31500003DCA1 /* NotesDetailPopViewModelData.m */,
-				C32945661C5F36870003DCA1 /* notesDetailTableViewCell.h */,
-				C32945671C5F36870003DCA1 /* notesDetailTableViewCell.m */,
-			);
-			name = NotesDescription;
 			sourceTree = "<group>";
 		};
 		C3285D5E1C3E2EDC00EFDBC1 /* Login */ = {
@@ -213,52 +198,27 @@
 			children = (
 				C32FF5C41C3CD9F500953F56 /* ViewController.h */,
 				C32FF5C51C3CD9F500953F56 /* ViewController.m */,
+				CD2F4DEA1D92A6BB008098C3 /* HomeTable.h */,
+				CD2F4DEB1D92A6BB008098C3 /* HomeTable.m */,
+				CD2F4DF31D92BBAD008098C3 /* BuyAppViewController.h */,
+				CD2F4DF41D92BBAD008098C3 /* BuyAppViewController.m */,
+				8626C6A91DAE365D0034D8ED /* FlashviewController.h */,
+				8626C6AA1DAE365D0034D8ED /* FlashviewController.m */,
 			);
 			name = Login;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		C3285D641C3E3F4100EFDBC1 /* Folder */ = {
-			isa = PBXGroup;
-			children = (
-				C3285D5F1C3E3EFB00EFDBC1 /* FolderViewController.h */,
-				C3285D601C3E3EFB00EFDBC1 /* FolderViewController.m */,
-				C32E10BE1C3F777E007C6CB2 /* FolderModelData.h */,
-				C32E10BF1C3F777E007C6CB2 /* FolderModelData.m */,
-			);
-			name = Folder;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		C32E10C81C3FE787007C6CB2 /* NoteDetail */ = {
-			isa = PBXGroup;
-			children = (
-				C32E10C41C3FD448007C6CB2 /* NotesDetail.h */,
-				C32E10C51C3FD448007C6CB2 /* NotesDetail.m */,
-				C332AF2A1C40C39600C91CB3 /* NoteTableViewCell.h */,
-				C332AF2B1C40C39600C91CB3 /* NoteTableViewCell.m */,
-				C341E2B31C4D02CE00B25825 /* NotesModelData.h */,
-				C341E2B41C4D02CE00B25825 /* NotesModelData.m */,
-				C32945691C5F519F0003DCA1 /* NotesPopViewViewController.h */,
-				C329456A1C5F519F0003DCA1 /* NotesPopViewViewController.m */,
-				C329456C1C5F52090003DCA1 /* NotePopTableCellTableViewCell.h */,
-				C329456D1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m */,
-				C329456F1C5F54510003DCA1 /* notesPopModelData.h */,
-				C32945701C5F54510003DCA1 /* notesPopModelData.m */,
-			);
-			name = NoteDetail;
-			sourceTree = "<group>";
-		};
 		C32FF5B21C3CD9F400953F56 = {
 			isa = PBXGroup;
 			children = (
-				C32FF5F11C3CE18700953F56 /* QuartzCore.framework */,
+				CDE25DB91D6732C2006E4AE7 /* Framework */,
 				C32FF5BD1C3CD9F400953F56 /* VNote */,
 				C32FF5D71C3CD9F500953F56 /* VNoteTests */,
 				C32FF5E21C3CD9F500953F56 /* VNoteUITests */,
 				C32FF5BC1C3CD9F400953F56 /* Products */,
-				F405652A0D8E7DCFA75359FD /* Pods */,
 				933B827E5B19EBA2F847765F /* Frameworks */,
+				518CBAEAB0178B97EA514C7E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,19 +235,12 @@
 		C32FF5BD1C3CD9F400953F56 /* VNote */ = {
 			isa = PBXGroup;
 			children = (
-				C320322F1C5633DA00680624 /* ForgetPassword */,
-				C3EFE3291C466F49002702CB /* AboutUs */,
-				C3EFE3251C46464D002702CB /* ChangePassword */,
-				C32081621C44DCE20056E470 /* PopView */,
-				C322BE581C439B280092FA9C /* NotesDescription */,
-				C32E10C81C3FE787007C6CB2 /* NoteDetail */,
+				CD2B8CA81D81A42600E125B3 /* VNote.entitlements */,
+				CDBA7B761D8FA97C0034D72E /* InAppPurchase */,
 				C32FF5FB1C3D1FFB00953F56 /* AppDelegate */,
-				C32FF5FA1C3D071B00953F56 /* HomePage */,
-				C32FF5F61C3D020600953F56 /* SignUp */,
 				C3285D5E1C3E2EDC00EFDBC1 /* Login */,
 				C32FF5C71C3CD9F500953F56 /* Main.storyboard */,
 				C32FF5CA1C3CD9F500953F56 /* Assets.xcassets */,
-				C3285D641C3E3F4100EFDBC1 /* Folder */,
 				C32FF5CC1C3CD9F500953F56 /* LaunchScreen.storyboard */,
 				C32FF5CF1C3CD9F500953F56 /* Info.plist */,
 				C32FF5BE1C3CD9F500953F56 /* Supporting Files */,
@@ -299,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				C32FF5BF1C3CD9F500953F56 /* main.m */,
+				CD4D11001D51D32C005710C9 /* Notes.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -321,29 +275,6 @@
 			path = VNoteUITests;
 			sourceTree = "<group>";
 		};
-		C32FF5F61C3D020600953F56 /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				C32FF5F31C3CFC9600953F56 /* SignUp.h */,
-				C32FF5F41C3CFC9600953F56 /* SignUp.m */,
-			);
-			name = SignUp;
-			sourceTree = "<group>";
-		};
-		C32FF5FA1C3D071B00953F56 /* HomePage */ = {
-			isa = PBXGroup;
-			children = (
-				C32FF5F71C3D071500953F56 /* HomePage.h */,
-				C32FF5F81C3D071500953F56 /* HomePage.m */,
-				C3285D5B1C3E255B00EFDBC1 /* HomePageTableViewCell.h */,
-				C3285D5C1C3E255B00EFDBC1 /* HomePageTableViewCell.m */,
-				C341E2B01C4CEB2900B25825 /* HomeModelData.h */,
-				C332AF301C40F0AA00C91CB3 /* File */,
-				C341E2B11C4CEB2900B25825 /* HomeModelData.m */,
-			);
-			name = HomePage;
-			sourceTree = "<group>";
-		};
 		C32FF5FB1C3D1FFB00953F56 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,43 +284,27 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		C332AF301C40F0AA00C91CB3 /* File */ = {
+		CDBA7B761D8FA97C0034D72E /* InAppPurchase */ = {
 			isa = PBXGroup;
 			children = (
-				C332AF2D1C40EE8E00C91CB3 /* FileViewController.h */,
-				C332AF2E1C40EE8E00C91CB3 /* FileViewController.m */,
-				C332AF311C413AAF00C91CB3 /* FileModelData.h */,
-				C332AF321C413AAF00C91CB3 /* FileModelData.m */,
+				519B5DDF1E3F1D0D00A3B2DF /* VerifocationViewController */,
+				CDBA7B771D8FB15A0034D72E /* AppPurchase.h */,
+				CDBA7B781D8FB15A0034D72E /* AppPurchase.m */,
+				CDBA7B831D8FC4630034D72E /* AppPurchaseProduct.h */,
+				CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */,
+				CD8089CB1D910E8600740900 /* AppPurchaseProductProcess.h */,
+				CD8089CC1D910E8600740900 /* AppPurchaseProductProcess.m */,
 			);
-			name = File;
+			name = InAppPurchase;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		C3EFE3251C46464D002702CB /* ChangePassword */ = {
+		CDE25DB91D6732C2006E4AE7 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				C3EFE3221C4637B5002702CB /* ChangePasswordViewController.h */,
-				C3EFE3231C4637B5002702CB /* ChangePasswordViewController.m */,
+				CD4D10FE1D51D1A8005710C9 /* UIKit.framework */,
 			);
-			name = ChangePassword;
-			sourceTree = "<group>";
-		};
-		C3EFE3291C466F49002702CB /* AboutUs */ = {
-			isa = PBXGroup;
-			children = (
-				C3EFE3261C466F44002702CB /* AboutUs.h */,
-				C3EFE3271C466F44002702CB /* AboutUs.m */,
-			);
-			name = AboutUs;
-			sourceTree = "<group>";
-		};
-		F405652A0D8E7DCFA75359FD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				03E36478158EA4C182C43839 /* Pods-VNote.debug.xcconfig */,
-				367CF9B1B905EDBF6089A525 /* Pods-VNote.release.xcconfig */,
-			);
-			name = Pods;
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,12 +314,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32FF5E81C3CD9F500953F56 /* Build configuration list for PBXNativeTarget "VNote" */;
 			buildPhases = (
-				4EE0B90B3F83E7F535E80F3A /* Check Pods Manifest.lock */,
+				E21C235ECC93B44BC0DECFB1 /* [CP] Check Pods Manifest.lock */,
 				C32FF5B71C3CD9F400953F56 /* Sources */,
 				C32FF5B81C3CD9F400953F56 /* Frameworks */,
 				C32FF5B91C3CD9F400953F56 /* Resources */,
-				946A242EF5FA2556A34CC303 /* Embed Pods Frameworks */,
-				DA017E1E76921D0B1C8C50A4 /* Copy Pods Resources */,
+				52D3D5A33C033EBF35510A28 /* [CP] Embed Pods Frameworks */,
+				1DE90F2DD2E6453F205DF22A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -419,9 +334,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32FF5EB1C3CD9F500953F56 /* Build configuration list for PBXNativeTarget "VNoteTests" */;
 			buildPhases = (
+				1D89F587C93F6DDE16C9DBB8 /* [CP] Check Pods Manifest.lock */,
 				C32FF5D01C3CD9F500953F56 /* Sources */,
 				C32FF5D11C3CD9F500953F56 /* Frameworks */,
 				C32FF5D21C3CD9F500953F56 /* Resources */,
+				DCFFFBAD777BD04B14244CF6 /* [CP] Embed Pods Frameworks */,
+				8331B3268BF2E557840C35AF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -437,9 +355,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32FF5EE1C3CD9F500953F56 /* Build configuration list for PBXNativeTarget "VNoteUITests" */;
 			buildPhases = (
+				C25B295A94FDC47E9CF8AC62 /* [CP] Check Pods Manifest.lock */,
 				C32FF5DB1C3CD9F500953F56 /* Sources */,
 				C32FF5DC1C3CD9F500953F56 /* Frameworks */,
 				C32FF5DD1C3CD9F500953F56 /* Resources */,
+				78C99D4726C6C5A1E4181AC0 /* [CP] Copy Pods Resources */,
+				6F56A83494684D6E1C06731E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -462,6 +383,15 @@
 				TargetAttributes = {
 					C32FF5BA1C3CD9F400953F56 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = DH337745N2;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.OMC = {
+								enabled = 0;
+							};
+						};
 					};
 					C32FF5D31C3CD9F500953F56 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -521,29 +451,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4EE0B90B3F83E7F535E80F3A /* Check Pods Manifest.lock */ = {
+		1D89F587C93F6DDE16C9DBB8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		946A242EF5FA2556A34CC303 /* Embed Pods Frameworks */ = {
+		1DE90F2DD2E6453F205DF22A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNote/Pods-VNote-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52D3D5A33C033EBF35510A28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,19 +496,94 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNote/Pods-VNote-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA017E1E76921D0B1C8C50A4 /* Copy Pods Resources */ = {
+		6F56A83494684D6E1C06731E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNote/Pods-VNote-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78C99D4726C6C5A1E4181AC0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8331B3268BF2E557840C35AF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C25B295A94FDC47E9CF8AC62 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DCFFFBAD777BD04B14244CF6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E21C235ECC93B44BC0DECFB1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -574,33 +594,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32FF5C61C3CD9F500953F56 /* ViewController.m in Sources */,
-				C32945651C5F31500003DCA1 /* NotesDetailPopViewModelData.m in Sources */,
-				C32945621C5F2EA40003DCA1 /* NotesDetailPopView.m in Sources */,
-				C332AF331C413AAF00C91CB3 /* FileModelData.m in Sources */,
-				C32E10C61C3FD448007C6CB2 /* NotesDetail.m in Sources */,
-				C32081681C4508560056E470 /* PopModelData.m in Sources */,
-				C3285D611C3E3EFB00EFDBC1 /* FolderViewController.m in Sources */,
-				C32081611C44D7D80056E470 /* PopViewController.m in Sources */,
-				C322BE571C439AFA0092FA9C /* NotesDescriptionViewController.m in Sources */,
-				C32945711C5F54510003DCA1 /* notesPopModelData.m in Sources */,
-				C32FF5F51C3CFC9600953F56 /* SignUp.m in Sources */,
-				C32E10C01C3F777E007C6CB2 /* FolderModelData.m in Sources */,
-				C3EFE3281C466F44002702CB /* AboutUs.m in Sources */,
-				C329456E1C5F52090003DCA1 /* NotePopTableCellTableViewCell.m in Sources */,
-				C334DEAA1C4E062A00B21B6A /* NotesDescriptionModelData.m in Sources */,
-				C341E2B21C4CEB2900B25825 /* HomeModelData.m in Sources */,
-				C32081651C44DD0A0056E470 /* PopTableViewCell.m in Sources */,
-				C32FF5F91C3D071500953F56 /* HomePage.m in Sources */,
-				C332AF2F1C40EE8E00C91CB3 /* FileViewController.m in Sources */,
+				CDBA7B791D8FB15A0034D72E /* AppPurchase.m in Sources */,
+				CD2F4DF51D92BBAD008098C3 /* BuyAppViewController.m in Sources */,
+				519B5DF01E3F364500A3B2DF /* NSData+Base64.m in Sources */,
 				C32FF5C31C3CD9F500953F56 /* AppDelegate.m in Sources */,
+				CDBA7B851D8FC4630034D72E /* AppPurchaseProduct.m in Sources */,
+				519B5DF11E3F364500A3B2DF /* VerificationController.m in Sources */,
 				C32FF5C01C3CD9F500953F56 /* main.m in Sources */,
-				C3EFE3241C4637B5002702CB /* ChangePasswordViewController.m in Sources */,
-				C3285D5D1C3E255B00EFDBC1 /* HomePageTableViewCell.m in Sources */,
-				C332AF2C1C40C39600C91CB3 /* NoteTableViewCell.m in Sources */,
-				C390A4B41C4E5216006EC575 /* ForgetPasswordViewController.m in Sources */,
-				C32945681C5F36870003DCA1 /* notesDetailTableViewCell.m in Sources */,
-				C341E2B51C4D02CE00B25825 /* NotesModelData.m in Sources */,
-				C329456B1C5F519F0003DCA1 /* NotesPopViewViewController.m in Sources */,
+				CD2F4DEC1D92A6BB008098C3 /* HomeTable.m in Sources */,
+				8626C6AB1DAE365D0034D8ED /* FlashviewController.m in Sources */,
+				CD8089CD1D910E8600740900 /* AppPurchaseProductProcess.m in Sources */,
+				CD4D11021D51D32C005710C9 /* Notes.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,34 +743,57 @@
 		};
 		C32FF5E91C3CD9F500953F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03E36478158EA4C182C43839 /* Pods-VNote.debug.xcconfig */;
+			baseConfigurationReference = 357528627AAFA936B372BC0C /* Pods-VNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = VNote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vmoksha.inappurchasedemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		C32FF5EA1C3CD9F500953F56 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 367CF9B1B905EDBF6089A525 /* Pods-VNote.release.xcconfig */;
+			baseConfigurationReference = E92319ABFED2210CF2152788 /* Pods-VNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = VNote/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vmoksha.inappurchasedemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		C32FF5EC1C3CD9F500953F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6277A8F352ED24176A31DAD5 /* Pods-VNoteTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VNoteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNoteTests;
@@ -777,8 +804,13 @@
 		};
 		C32FF5ED1C3CD9F500953F56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9316962FD08017221A3CBBCD /* Pods-VNoteTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VNoteTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNoteTests;
@@ -789,7 +821,12 @@
 		};
 		C32FF5EF1C3CD9F500953F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A05AB8EF2304B934F1358C41 /* Pods-VNoteUITests.debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VNoteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNoteUITests;
@@ -801,7 +838,12 @@
 		};
 		C32FF5F01C3CD9F500953F56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A428380DF8F620E39B78403 /* Pods-VNoteUITests.release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VNoteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.VNoteUITests;
@@ -851,6 +893,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CD4D11001D51D32C005710C9 /* Notes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CD4D11011D51D32C005710C9 /* Notes.xcdatamodel */,
+			);
+			currentVersion = CD4D11011D51D32C005710C9 /* Notes.xcdatamodel */;
+			path = Notes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C32FF5B31C3CD9F400953F56 /* Project object */;
 }
