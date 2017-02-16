@@ -19,7 +19,8 @@ uint32_t signature_length;
 
 
 
-@implementation VerificationController {
+@implementation VerificationController
+{
     NSMutableDictionary * _completionHandlers;
 }
 
@@ -44,7 +45,7 @@ uint32_t signature_length;
 	return self;
 }
 
-
+//Parsing the receipt data :
 - (NSDictionary *)dictionaryFromPlistData:(NSData *)data
 {
     NSError *error;
@@ -99,29 +100,38 @@ uint32_t signature_length;
     
     // The transaction looks ok, so start the verify process.
     
-    // Encode the receiptData for the itms receipt verification POST request.
-//    NSString *jsonObjectString = [self encodeBase64:(uint8_t *)transaction.transactionReceipt.bytes
-//                                             length:transaction.transactionReceipt.length];
-//    
-//    // Create the POST request payload.
-//    NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\", \"password\" : \"%@\"}",
-//                         jsonObjectString, ITC_CONTENT_PROVIDER_SHARED_SECRET];
-//    
-//    NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
-//    
-//    // Use ITMS_SANDBOX_VERIFY_RECEIPT_URL while testing against the sandbox.
-//    NSString *serverURL = ITMS_SANDBOX_VERIFY_RECEIPT_URL; //ITMS_PROD_VERIFY_RECEIPT_URL;
-//    
-//    // Create the POST request to the server.
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:serverURL]];
-//    [request setHTTPMethod:@"POST"];
-//    [request setHTTPBody:payloadData];
-//    NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-//    
-//    _completionHandlers[[NSValue valueWithNonretainedObject:conn]] = completionHandler;
-//    
-//    [conn start];
-//    
+     //Encode the receiptData for the itms receipt verification POST request.
+    
+    NSString *jsonObjectString = [self encodeBase64:(uint8_t *)transaction.transactionReceipt.bytes
+                                             length:transaction.transactionReceipt.length];
+    
+    // Create the POST request payload.
+    NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\", \"password\" : \"%@\"}",
+                         jsonObjectString, ITC_CONTENT_PROVIDER_SHARED_SECRET];
+    
+    NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // Use ITMS_SANDBOX_VERIFY_RECEIPT_URL while testing against the sandbox.
+    NSString *serverURL = ITMS_SANDBOX_VERIFY_RECEIPT_URL; //ITMS_PROD_VERIFY_RECEIPT_URL;
+    
+    // Create the POST request to the server.
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:serverURL]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    [request setHTTPBody:payloadData];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    
+
+    //    _completionHandlers[[NSValue valueWithNonretainedObject:conn]] = completionHandler;
+    
+    
+     [_completionHandlers setObject:[completionHandler copy] forKey:[NSValue valueWithNonretainedObject:conn]];
+    
+    [conn start];
+    
     // The transation receipt has not been validated yet.  That is done from the NSURLConnection callback.
 }
     
@@ -310,7 +320,8 @@ uint32_t signature_length;
     // The receipt is valid, so checked the receipt specifics now.
     
     NSDictionary *verifiedReceiptReceiptDictionary  = [verifiedReceiptDictionary objectForKey:@"receipt"];
-    // NSString *verifiedReceiptUniqueIdentifier       = [verifiedReceiptReceiptDictionary objectForKey:@"unique_identifier"];
+    
+    NSString *verifiedReceiptUniqueIdentifier       = [verifiedReceiptReceiptDictionary objectForKey:@"unique_identifier"];
     NSString *transactionIdFromVerifiedReceipt      = [verifiedReceiptReceiptDictionary objectForKey:@"transaction_id"];
     
     // Get the transaction's receipt data from the transactionsReceiptStorageDictionary
@@ -410,53 +421,66 @@ uint32_t signature_length;
     
 }
 
-//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-//{
-//    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    
-//    // So we got some receipt data. Now does it all check out?
-//    BOOL isOk = [self doesTransactionInfoMatchReceipt:responseString];
-//
-//    VerifyCompletionHandler completionHandler = _completionHandlers[[NSValue valueWithNonretainedObject:connection]];
-//    [_completionHandlers removeObjectForKey:[NSValue valueWithNonretainedObject:connection]];
-//    if (isOk)
-//    {
-//        //Validation suceeded. Unlock content here.
-//        NSLog(@"Validation successful");
-//        completionHandler(TRUE);
-//
-//    } else {
-//        NSLog(@"Validation failed");
-//        completionHandler(FALSE);
-//    }
-//}
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    // So we got some receipt data. Now does it all check out?
+    BOOL isOk = [self doesTransactionInfoMatchReceipt:responseString];
+
+    
+    
+    if (_completionHandlers && [_completionHandlers respondsToSelector:@selector(removeObjectForKey:)])
+    {
+    VerifyCompletionHandler completionHandler = _completionHandlers[[NSValue valueWithNonretainedObject:connection]];
+   
+    [_completionHandlers removeObjectForKey:[NSValue valueWithNonretainedObject:connection]];
+   
+         if (isOk)
+         
+         {
+               //Validation suceeded. Unlock content here.
+               NSLog(@"Validation successful");
+              completionHandler(TRUE);
+         }
+    
+           else
+         {
+          
+         NSLog(@"Validation failed");
+          completionHandler(FALSE);
+         
+         }
+    }
+    
+}
 
 
-//- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-//{
-//    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust])
-//    {
-//        SecTrustRef trust = [[challenge protectionSpace] serverTrust];
-//        NSError *error = nil;
-//        BOOL didUseCredential = NO;
-//        BOOL isTrusted = [self validateTrust:trust error:&error];
-//        if (isTrusted)
-//        {
-//            NSURLCredential *trust_credential = [NSURLCredential credentialForTrust:trust];
-//            if (trust_credential)
-//            {
-//                [[challenge sender] useCredential:trust_credential forAuthenticationChallenge:challenge];
-//                didUseCredential = YES;
-//            }
-//        }
-//        if (!didUseCredential)
-//        {
-//            [[challenge sender] cancelAuthenticationChallenge:challenge];
-//        }
-//    } else {
-//        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
-//    }
-//}
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        SecTrustRef trust = [[challenge protectionSpace] serverTrust];
+        NSError *error = nil;
+        BOOL didUseCredential = NO;
+        BOOL isTrusted = [self validateTrust:trust error:&error];
+        if (isTrusted)
+        {
+            NSURLCredential *trust_credential = [NSURLCredential credentialForTrust:trust];
+            if (trust_credential)
+            {
+                [[challenge sender] useCredential:trust_credential forAuthenticationChallenge:challenge];
+                didUseCredential = YES;
+            }
+        }
+        if (!didUseCredential)
+        {
+            [[challenge sender] cancelAuthenticationChallenge:challenge];
+        }
+    } else {
+        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
+    }
+}
 
 // NOTE: These are needed for 4.x (as willSendRequestForAuthenticationChallenge: is not supported)
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
@@ -465,63 +489,63 @@ uint32_t signature_length;
 }
 
 
-//- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-//{
-//    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust])
-//    {
-//        SecTrustRef trust = [[challenge protectionSpace] serverTrust];
-//        NSError *error = nil;
-//        BOOL didUseCredential = NO;
-//        BOOL isTrusted = [self validateTrust:trust error:&error];
-//        if (isTrusted)
-//        {
-//            NSURLCredential *credential = [NSURLCredential credentialForTrust:trust];
-//            if (credential)
-//            {
-//                [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-//                didUseCredential = YES;
-//            }
-//        }
-//        if (! didUseCredential) {
-//            [[challenge sender] cancelAuthenticationChallenge:challenge];
-//        }
-//    }
-//    else {
-//        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
-//    }
-//}
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        SecTrustRef trust = [[challenge protectionSpace] serverTrust];
+        NSError *error = nil;
+        BOOL didUseCredential = NO;
+        BOOL isTrusted = [self validateTrust:trust error:&error];
+        if (isTrusted)
+        {
+            NSURLCredential *credential = [NSURLCredential credentialForTrust:trust];
+            if (credential)
+            {
+                [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+                didUseCredential = YES;
+            }
+        }
+        if (! didUseCredential) {
+            [[challenge sender] cancelAuthenticationChallenge:challenge];
+        }
+    }
+    else {
+        [[challenge sender] performDefaultHandlingForAuthenticationChallenge:challenge];
+    }
+}
 
-//#pragma mark
-//#pragma mark NSURLConnection - Trust validation
-//
-//- (BOOL)validateTrust:(SecTrustRef)trust error:(NSError **)error
-//{
-//    
-//    // Include some Security framework SPIs
-//    extern CFStringRef kSecTrustInfoExtendedValidationKey;
-//    extern CFDictionaryRef SecTrustCopyInfo(SecTrustRef trust);
-//    
-//    BOOL trusted = NO;
-//    SecTrustResultType trust_result;
-//    if ((noErr == SecTrustEvaluate(trust, &trust_result)) && (trust_result == kSecTrustResultUnspecified))
-//    {
-//        NSDictionary *trust_info = (__bridge_transfer NSDictionary *)SecTrustCopyInfo(trust);
-//        id hasEV = [trust_info objectForKey:(__bridge NSString *)kSecTrustInfoExtendedValidationKey];
-//        trusted =  [hasEV isKindOfClass:[NSValue class]] && [hasEV boolValue];
-//    }
-//    
-//    if (trust)
-//    {
-//        if (!trusted && error)
-//        {
-//            *error = [NSError errorWithDomain:@"kSecTrustError" code:(NSInteger)trust_result userInfo:nil];
-//        }
-//        return trusted;
-//    }
-//    return NO;
-//}
-//
-//
-//
+#pragma mark
+#pragma mark NSURLConnection - Trust validation
+
+- (BOOL)validateTrust:(SecTrustRef)trust error:(NSError **)error
+{
+    
+    // Include some Security framework SPIs
+    extern CFStringRef kSecTrustInfoExtendedValidationKey;
+    extern CFDictionaryRef SecTrustCopyInfo(SecTrustRef trust);
+    
+    BOOL trusted = NO;
+    SecTrustResultType trust_result;
+    if ((noErr == SecTrustEvaluate(trust, &trust_result)) && (trust_result == kSecTrustResultUnspecified))
+    {
+        NSDictionary *trust_info = (__bridge_transfer NSDictionary *)SecTrustCopyInfo(trust);
+        id hasEV = [trust_info objectForKey:(__bridge NSString *)kSecTrustInfoExtendedValidationKey];
+        trusted =  [hasEV isKindOfClass:[NSValue class]] && [hasEV boolValue];
+    }
+    
+    if (trust)
+    {
+        if (!trusted && error)
+        {
+            *error = [NSError errorWithDomain:@"kSecTrustError" code:(NSInteger)trust_result userInfo:nil];
+        }
+        return trusted;
+    }
+    return NO;
+}
+
+
+
 
 @end

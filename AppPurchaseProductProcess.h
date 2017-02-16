@@ -7,6 +7,9 @@
 //
 
 @class SKProduct;
+
+
+
 #import <Foundation/Foundation.h>
 
 @interface AppPurchaseProductProcess : NSObject
@@ -15,10 +18,17 @@
 
 - (BOOL)allowedToPurchase;
 
+
+
+
 @property(assign,nonatomic)BOOL isAvilableForPurchase;
 @property(nonatomic,strong)NSString *productIdentifier;
 @property(nonatomic,strong)SKProduct *skProduct;
 @property (nonatomic, assign) BOOL purchaseInProgress;
 @property (nonatomic, strong)NSString * icon;
-@property (nonatomic, strong)AppPurchaseProductProcess * info;
+
+
+@property (nonatomic, strong)AppPurchaseProductProcess * apinfo;
+
+
 @end

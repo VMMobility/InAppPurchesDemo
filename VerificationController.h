@@ -4,12 +4,14 @@
 
 #define IS_IOS6_AWARE (__IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1)
 
-#define ITMS_PROD_VERIFY_RECEIPT_URL        @"https://buy.itunes.apple.com/verifyReceipt"
-#define ITMS_SANDBOX_VERIFY_RECEIPT_URL     @"https://sandbox.itunes.apple.com/verifyReceipt";
+#define ITMS_PROD_VERIFY_RECEIPT_URL      @"https://buy.itunes.apple.com/verifyReceipt"
+#define ITMS_SANDBOX_VERIFY_RECEIPT_URL    @"https://sandbox.itunes.apple.com/verifyReceipt";
 
-#define KNOWN_TRANSACTIONS_KEY              @"knownIAPTransactions"
+#define KNOWN_TRANSACTIONS_KEY     @"knownIAPTransactions"
 
 #define ITC_CONTENT_PROVIDER_SHARED_SECRET  @"b03ec3a7460049bcbdb0e7aba2fbbdd9"
+
+
 
 
 char* base64_encode(const void* buf, size_t size);

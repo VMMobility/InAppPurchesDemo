@@ -9,8 +9,9 @@
 #import "AppPurchase.h"
 #import <StoreKit/StoreKit.h>
 #import "AppPurchaseProductProcess.h"
-#import "FlashviewController.h"
 #import "VerificationController.h"
+
+#import "BuyAppViewController.h"
 
 
 
@@ -27,6 +28,9 @@
 {
     SKProductsRequest *productsRequest;
     RequestProductsCompletionHandler _completionHandler;
+    
+    BuyAppViewController * buyVC;
+    
 }
 
 - (id)initWithProducts:(NSMutableDictionary *)products
@@ -64,7 +68,6 @@
     NSLog(@"In App Purchase app deatils:-");
     productsRequest=nil;
     NSArray *skProducts=response.products;
-    
     for(SKProduct *skProduct in skProducts)
     {
         AppPurchaseProductProcess *product=_products[skProduct.productIdentifier];
@@ -75,7 +78,6 @@
         NSLog(@"Product price:%0.2f",skProduct.price.floatValue);
         NSLog(@"Product description:%@",skProduct.localizedDescription);
     }
-   
     for (NSString *invalidProductIdentifier in response.invalidProductIdentifiers)
     {
         AppPurchaseProductProcess *product=_products[invalidProductIdentifier];
@@ -144,7 +146,14 @@
     
     NSLog(@"completeTransaction...");
     
+    
+    
     [self validateReceiptForTransaction:transaction];
+    
+   // [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
+    
+    //[self provideContentForTransaction:transaction productIdentifier:transaction.payment.productIdentifier];
+    
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 
 }
@@ -187,8 +196,7 @@
         NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
     }
     AppPurchaseProductProcess * product = _products[transaction.payment.productIdentifier];
-    [self notifyStatusForProductIdentifier: transaction.payment.
-     productIdentifier string:@"Purchase failed."];
+    [self notifyStatusForProductIdentifier: transaction.payment.productIdentifier string:@"Purchase failed."];
     product.purchaseInProgress = NO;
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
@@ -208,14 +216,27 @@
     AppPurchaseProductProcess *product=_products[productIdentifier];
     [self provideContentForProductIdentifier:productIdentifier];
     [self notifyStatusForProductIdentifier:productIdentifier string:@"Purchase complete!"];
+    
     product.purchaseInProgress = NO;
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 
 }
 
+// Providing content for Particular product Identifiers :
 - (void)provideContentForProductIdentifier: (NSString *)productIdentifier
 {
 
+    if ([productIdentifier isEqualToString:@"InAppPurchase_Project_Id_Auto_Renewable"])
+    {
+        
+        NSLog(@"Unlock the content for User After subscribption done sucssefully");
+//        buyVC = [[BuyAppViewController alloc]init];
+//        
+//        [buyVC goToContentVC];
+//        
+
+    }
+    
 }
 
 //New Code For Non Auto RenewAble Subscription

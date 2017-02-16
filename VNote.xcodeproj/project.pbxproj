@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		097D121E1E4DC01100F0B064 /* IAPInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 097D121D1E4DC01100F0B064 /* IAPInfo.plist */; };
+		097D12271E4DCE7600F0B064 /* AppPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 097D12261E4DCE7600F0B064 /* AppPurchase.m */; };
+		097D122A1E4DEE3C00F0B064 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097D12291E4DEE3C00F0B064 /* ContentViewController.m */; };
 		0B68A9F64E378BDA4BFDCF10 /* libPods-VNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B57982BA149561F45514EC1 /* libPods-VNote.a */; };
 		519B5DF01E3F364500A3B2DF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 519B5DED1E3F364500A3B2DF /* NSData+Base64.m */; };
 		519B5DF11E3F364500A3B2DF /* VerificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519B5DEF1E3F364500A3B2DF /* VerificationController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		548D9A47CAEA548B83E3A149 /* libPods-VNoteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE847A1BE9F1A59F65C83914 /* libPods-VNoteTests.a */; };
 		70F250B260E334D4ACA56DB0 /* libPods-VNoteUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB238E5B97BE3F325F79916B /* libPods-VNoteUITests.a */; };
-		8626C6AB1DAE365D0034D8ED /* FlashviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8626C6AA1DAE365D0034D8ED /* FlashviewController.m */; };
 		C32FF5C01C3CD9F500953F56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5BF1C3CD9F500953F56 /* main.m */; };
 		C32FF5C31C3CD9F500953F56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5C21C3CD9F500953F56 /* AppDelegate.m */; };
 		C32FF5C61C3CD9F500953F56 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32FF5C51C3CD9F500953F56 /* ViewController.m */; };
@@ -35,7 +37,6 @@
 		CD4D110C1D51DBF4005710C9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D110A1D51DBF4005710C9 /* libsqlite3.0.tbd */; };
 		CD4D110D1D51DBF4005710C9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D110B1D51DBF4005710C9 /* libsqlite3.tbd */; };
 		CD8089CD1D910E8600740900 /* AppPurchaseProductProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8089CC1D910E8600740900 /* AppPurchaseProductProcess.m */; };
-		CDBA7B791D8FB15A0034D72E /* AppPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA7B781D8FB15A0034D72E /* AppPurchase.m */; };
 		CDBA7B851D8FC4630034D72E /* AppPurchaseProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		097D121D1E4DC01100F0B064 /* IAPInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = IAPInfo.plist; path = ../IAPInfo.plist; sourceTree = "<group>"; };
+		097D12251E4DCE7600F0B064 /* AppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchase.h; sourceTree = "<group>"; };
+		097D12261E4DCE7600F0B064 /* AppPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchase.m; sourceTree = "<group>"; };
+		097D12281E4DEE3C00F0B064 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		097D12291E4DEE3C00F0B064 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		2B57982BA149561F45514EC1 /* libPods-VNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		357528627AAFA936B372BC0C /* Pods-VNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.debug.xcconfig"; sourceTree = "<group>"; };
 		519B5DEC1E3F364500A3B2DF /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -65,8 +71,6 @@
 		519B5DEF1E3F364500A3B2DF /* VerificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationController.m; sourceTree = "<group>"; };
 		5A428380DF8F620E39B78403 /* Pods-VNoteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6277A8F352ED24176A31DAD5 /* Pods-VNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8626C6A91DAE365D0034D8ED /* FlashviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashviewController.h; sourceTree = "<group>"; };
-		8626C6AA1DAE365D0034D8ED /* FlashviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashviewController.m; sourceTree = "<group>"; };
 		9316962FD08017221A3CBBCD /* Pods-VNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteTests/Pods-VNoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		A05AB8EF2304B934F1358C41 /* Pods-VNoteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNoteUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VNoteUITests/Pods-VNoteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB238E5B97BE3F325F79916B /* libPods-VNoteUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VNoteUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,8 +109,6 @@
 		CD4D110B1D51DBF4005710C9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CD8089CB1D910E8600740900 /* AppPurchaseProductProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchaseProductProcess.h; sourceTree = "<group>"; };
 		CD8089CC1D910E8600740900 /* AppPurchaseProductProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchaseProductProcess.m; sourceTree = "<group>"; };
-		CDBA7B771D8FB15A0034D72E /* AppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchase.h; sourceTree = "<group>"; };
-		CDBA7B781D8FB15A0034D72E /* AppPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchase.m; sourceTree = "<group>"; };
 		CDBA7B831D8FC4630034D72E /* AppPurchaseProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPurchaseProduct.h; sourceTree = "<group>"; };
 		CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPurchaseProduct.m; sourceTree = "<group>"; };
 		E92319ABFED2210CF2152788 /* Pods-VNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-VNote/Pods-VNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,8 +204,8 @@
 				CD2F4DEB1D92A6BB008098C3 /* HomeTable.m */,
 				CD2F4DF31D92BBAD008098C3 /* BuyAppViewController.h */,
 				CD2F4DF41D92BBAD008098C3 /* BuyAppViewController.m */,
-				8626C6A91DAE365D0034D8ED /* FlashviewController.h */,
-				8626C6AA1DAE365D0034D8ED /* FlashviewController.m */,
+				097D12281E4DEE3C00F0B064 /* ContentViewController.h */,
+				097D12291E4DEE3C00F0B064 /* ContentViewController.m */,
 			);
 			name = Login;
 			path = ..;
@@ -243,6 +245,7 @@
 				C32FF5CA1C3CD9F500953F56 /* Assets.xcassets */,
 				C32FF5CC1C3CD9F500953F56 /* LaunchScreen.storyboard */,
 				C32FF5CF1C3CD9F500953F56 /* Info.plist */,
+				097D121D1E4DC01100F0B064 /* IAPInfo.plist */,
 				C32FF5BE1C3CD9F500953F56 /* Supporting Files */,
 			);
 			path = VNote;
@@ -288,8 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				519B5DDF1E3F1D0D00A3B2DF /* VerifocationViewController */,
-				CDBA7B771D8FB15A0034D72E /* AppPurchase.h */,
-				CDBA7B781D8FB15A0034D72E /* AppPurchase.m */,
+				097D12251E4DCE7600F0B064 /* AppPurchase.h */,
+				097D12261E4DCE7600F0B064 /* AppPurchase.m */,
 				CDBA7B831D8FC4630034D72E /* AppPurchaseProduct.h */,
 				CDBA7B841D8FC4630034D72E /* AppPurchaseProduct.m */,
 				CD8089CB1D910E8600740900 /* AppPurchaseProductProcess.h */,
@@ -384,6 +387,7 @@
 					C32FF5BA1C3CD9F400953F56 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = DH337745N2;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -429,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32FF5CE1C3CD9F500953F56 /* LaunchScreen.storyboard in Resources */,
+				097D121E1E4DC01100F0B064 /* IAPInfo.plist in Resources */,
 				C32FF5CB1C3CD9F500953F56 /* Assets.xcassets in Resources */,
 				C32FF5C91C3CD9F500953F56 /* Main.storyboard in Resources */,
 			);
@@ -594,7 +599,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32FF5C61C3CD9F500953F56 /* ViewController.m in Sources */,
-				CDBA7B791D8FB15A0034D72E /* AppPurchase.m in Sources */,
 				CD2F4DF51D92BBAD008098C3 /* BuyAppViewController.m in Sources */,
 				519B5DF01E3F364500A3B2DF /* NSData+Base64.m in Sources */,
 				C32FF5C31C3CD9F500953F56 /* AppDelegate.m in Sources */,
@@ -602,7 +606,8 @@
 				519B5DF11E3F364500A3B2DF /* VerificationController.m in Sources */,
 				C32FF5C01C3CD9F500953F56 /* main.m in Sources */,
 				CD2F4DEC1D92A6BB008098C3 /* HomeTable.m in Sources */,
-				8626C6AB1DAE365D0034D8ED /* FlashviewController.m in Sources */,
+				097D122A1E4DEE3C00F0B064 /* ContentViewController.m in Sources */,
+				097D12271E4DCE7600F0B064 /* AppPurchase.m in Sources */,
 				CD8089CD1D910E8600740900 /* AppPurchaseProductProcess.m in Sources */,
 				CD4D11021D51D32C005710C9 /* Notes.xcdatamodeld in Sources */,
 			);
@@ -746,6 +751,7 @@
 			baseConfigurationReference = 357528627AAFA936B372BC0C /* Pods-VNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -759,6 +765,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmoksha.inappurchasedemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -768,6 +776,7 @@
 			baseConfigurationReference = E92319ABFED2210CF2152788 /* Pods-VNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -781,6 +790,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vmoksha.inappurchasedemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

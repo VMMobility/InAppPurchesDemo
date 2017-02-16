@@ -19,8 +19,10 @@
 @interface ViewController ()<SKProductsRequestDelegate,SKPaymentTransactionObserver,UITableViewDataSource,UITableViewDelegate>
 {
     
-    NSArray *products;
+    NSArray * products;
     NSNumberFormatter *priceFormatter;
+    
+    UIRefreshControl *refreshControl;
    
 }
 @property (weak, nonatomic) IBOutlet UITableView *myHomeTable;
@@ -48,13 +50,13 @@
     
     
     
-    UIRefreshControl *refreshControl=[[UIRefreshControl alloc]init];
+    refreshControl=[[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(reload)
                   forControlEvents:UIControlEventValueChanged];
     
     [self reload];
     
-    [refreshControl beginRefreshing];
+//    [refreshControl beginRefreshing];
     
     
     
@@ -89,9 +91,11 @@
              products=product;
              
              [self.myHomeTable reloadData];
-              }
         
-     }];
+         }
+        
+            
+    }];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

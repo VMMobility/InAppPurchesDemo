@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class AppPurchaseProductProcess;
+
 @interface BuyAppViewController : UIViewController
+
 @property (nonatomic, strong)AppPurchaseProductProcess *product;
 -(void)FlashScreen;
+-(void)goToContentVC;
 
 @end

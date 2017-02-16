@@ -10,11 +10,13 @@
 #import "AppPurchaseProductProcess.h"
 #import "AppPurchaseProduct.h"
 #import "AppPurchase.h"
-#import "FlashviewController.h"
+#import "ContentViewController.h"
 #import <StoreKit/StoreKit.h>
 @interface BuyAppViewController ()
 {
     NSNumberFormatter *priceFormatter;
+    
+    ContentViewController * contentVC;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *appNameLabel;
@@ -76,7 +78,13 @@
     
     [[AppPurchaseProduct sharedInstance] buyProduct:self.product];
 }
-
+-(void)goToContentVC
+{
+  
+    
+    [self performSegueWithIdentifier:@"toContentVC" sender:self];
+    
+}
 
 
 @end

@@ -13,8 +13,9 @@ typedef void(^RequestProductsCompletionHandler)
 (BOOL success,NSArray *products);
 @class AppPurchaseProductProcess;
 
-@interface AppPurchase : NSObject{
-    BuyAppViewController * buyApp ;
+@interface AppPurchase : NSObject
+{
+    BuyAppViewController *buyApp;
 }
 @property (nonatomic, strong) NSMutableDictionary *products;
 

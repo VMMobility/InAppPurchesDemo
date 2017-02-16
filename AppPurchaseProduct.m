@@ -12,6 +12,8 @@
 #import <StoreKit/StoreKit.h>
 
 
+
+
 @implementation AppPurchaseProduct
 
 + (AppPurchaseProduct *)sharedInstance
@@ -29,13 +31,13 @@
 
     AppPurchaseProductProcess * productPurchaseAutoRenewable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"InAppPurchase_Project_Id_Auto_Renewable"];
     
-   AppPurchaseProductProcess * productPurchaseNonAutoRenewable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"Com_Vmoksha_Biomag_6Months_Subscription"];
+  // AppPurchaseProductProcess * productPurchaseNonAutoRenewable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"Com_Vmoksha_Biomag_6Months_Subscription"];
     
-    AppPurchaseProductProcess * productPurchaseNonConsuable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"BioMagPractitioner_Advanced_6mth"];
+   // AppPurchaseProductProcess * productPurchaseNonConsuable1 =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"com_vmoksha_ProductID_consumable"];
     
-    AppPurchaseProductProcess * productPurchaseConsuable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"Com_Vmoksha_Biomag_3Months_Subscription"];
+    //AppPurchaseProductProcess * productPurchaseConsuable =[[AppPurchaseProductProcess alloc]initWithProductIdentifier:@"InAppPurchase_Project_Id_Consuable"];
     
-    NSMutableDictionary * dictProduct =[@{productPurchaseAutoRenewable.productIdentifier:productPurchaseAutoRenewable,productPurchaseNonAutoRenewable.productIdentifier:productPurchaseNonAutoRenewable,productPurchaseNonConsuable.productIdentifier:productPurchaseNonConsuable,productPurchaseConsuable.productIdentifier:productPurchaseConsuable}mutableCopy];
+    NSMutableDictionary * dictProduct =[@{productPurchaseAutoRenewable.productIdentifier:productPurchaseAutoRenewable}mutableCopy];
     
     if ((self = [super initWithProducts:dictProduct]))
     {
@@ -44,5 +46,40 @@
     return self;
 
 }
+
+/*
+- (void)provideContentForProductIdentifier: (NSString *)productIdentifier {
+   
+    if ([productIdentifier isEqualToString:@""]) {
+        int curHints =
+        
+        [HMContentController sharedInstance].hints;
+        [[HMContentController sharedInstance] setHints: curHints + 10];
+    }
+    else if ([productIdentifier isEqualToString:@"com.razeware.hangman.hundredhints"]) {
+        int curHints =
+        
+        [HMContentController sharedInstance].hints;
+        
+        [[HMContentController sharedInstance] setHints: curHints + 100];
+    } }
+
+*/
+//- (void)notifyStatusForProduct:(IAPProduct *)product string:(NSString *)string
+//{
+//    NSString * message = [NSString stringWithFormat:@"%@: %@", product.skProduct.localizedTitle, string];
+//    JSNotifier *notify =
+//    [[JSNotifier alloc]initWithTitle:message];
+//    [notify showFor:2.0];
+//}
+
+- (void)provideContentWithURL:(NSURL *)URL
+{
+    
+    //[[HMContentController sharedInstance]
+//                                        unlockContentWithDirURL:URL];
+}
+
+
 @end
 
