@@ -12,8 +12,6 @@
 #import <StoreKit/StoreKit.h>
 
 
-
-
 @implementation AppPurchaseProduct
 
 + (AppPurchaseProduct *)sharedInstance
@@ -45,39 +43,6 @@
     }
     return self;
 
-}
-
-/*
-- (void)provideContentForProductIdentifier: (NSString *)productIdentifier {
-   
-    if ([productIdentifier isEqualToString:@""]) {
-        int curHints =
-        
-        [HMContentController sharedInstance].hints;
-        [[HMContentController sharedInstance] setHints: curHints + 10];
-    }
-    else if ([productIdentifier isEqualToString:@"com.razeware.hangman.hundredhints"]) {
-        int curHints =
-        
-        [HMContentController sharedInstance].hints;
-        
-        [[HMContentController sharedInstance] setHints: curHints + 100];
-    } }
-
-*/
-//- (void)notifyStatusForProduct:(IAPProduct *)product string:(NSString *)string
-//{
-//    NSString * message = [NSString stringWithFormat:@"%@: %@", product.skProduct.localizedTitle, string];
-//    JSNotifier *notify =
-//    [[JSNotifier alloc]initWithTitle:message];
-//    [notify showFor:2.0];
-//}
-
-- (void)provideContentWithURL:(NSURL *)URL
-{
-    
-    //[[HMContentController sharedInstance]
-//                                        unlockContentWithDirURL:URL];
 }
 
 

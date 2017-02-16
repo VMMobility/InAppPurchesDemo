@@ -64,7 +64,7 @@ uint32_t signature_length;
     return dictionaryParsed;
 }
 
-
+// JSON response Data:
 - (NSDictionary *)dictionaryFromJSONData:(NSData *)data
 {
     NSError *error;
@@ -87,6 +87,7 @@ uint32_t signature_length;
 
 // This method should be called once a transaction gets to the SKPaymentTransactionStatePurchased or SKPaymentTransactionStateRestored state
 // Call it with the SKPaymentTransaction.transactionReceipt
+
 - (void)verifyPurchase:(SKPaymentTransaction *)transaction completionHandler:(VerifyCompletionHandler)completionHandler
 {    
     BOOL isOk = [self isTransactionAndItsReceiptValid:transaction];
@@ -106,13 +107,18 @@ uint32_t signature_length;
                                              length:transaction.transactionReceipt.length];
     
     // Create the POST request payload.
+    
     NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\", \"password\" : \"%@\"}",
                          jsonObjectString, ITC_CONTENT_PROVIDER_SHARED_SECRET];
     
     NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
     
     // Use ITMS_SANDBOX_VERIFY_RECEIPT_URL while testing against the sandbox.
-    NSString *serverURL = ITMS_SANDBOX_VERIFY_RECEIPT_URL; //ITMS_PROD_VERIFY_RECEIPT_URL;
+    
+    NSString *serverURL = ITMS_SANDBOX_VERIFY_RECEIPT_URL;
+    
+    // Production URL = ITMS_PROD_VERIFY_RECEIPT_URL;
+    
     
     // Create the POST request to the server.
     
@@ -125,24 +131,23 @@ uint32_t signature_length;
     NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
     
 
-    //    _completionHandlers[[NSValue valueWithNonretainedObject:conn]] = completionHandler;
-    
-    
      [_completionHandlers setObject:[completionHandler copy] forKey:[NSValue valueWithNonretainedObject:conn]];
     
-    [conn start];
+       [conn start];
     
     // The transation receipt has not been validated yet.  That is done from the NSURLConnection callback.
 }
     
+
 // Check the validity of the receipt.  If it checks out then also ensure the transaction is something
 // we haven't seen before and then decode and save the purchaseInfo from the receipt for later receipt validation.
+
 - (BOOL)isTransactionAndItsReceiptValid:(SKPaymentTransaction *)transaction
 {
     if (!(transaction && transaction.transactionReceipt && [transaction.transactionReceipt length] > 0))
     {
         // Transaction is not valid.
-        return NO;
+         return NO;
     }
     
     // Pull the purchase-info out of the transaction receipt, decode it, and save it for later so
@@ -165,22 +170,15 @@ uint32_t signature_length;
     NSString *signature             = [receiptDict objectForKey:@"signature"];
    
     
-//    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-//    NSString *LoginObjectId=[defaults objectForKey:@"LOGINOBJECTID"];
-//    [defaults synchronize];
-//    
-//    PFObject *fileData=[PFObject objectWithClassName:@"PurchaseDetails"];
-//    fileData[@"PurchaseDate"]=purchaseDateString;
-//    fileData[@"CreatedBy"]=LoginObjectId;
-//    [fileData saveInBackground];
-//    
-    
     // Convert the string into a date
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss z"];
     
     NSDate *purchaseDate = [dateFormat dateFromString:[purchaseDateString stringByReplacingOccurrencesOfString:@"Etc/" withString:@""]];
     
+    // Checking Transaction ID is unique r not
     
     if (![self isTransactionIdUnique:transactionId])
     {
@@ -199,15 +197,18 @@ uint32_t signature_length;
     }
     
     // Ensure the transaction itself is legit
+    
     if (![self doTransactionDetailsMatchPurchaseInfo:transaction withPurchaseInfo:purchaseInfoDict])
     {
         return NO;
     }
     
     // Make a note of the fact that we've seen the transaction id already
+    
     [self saveTransactionId:transactionId];
     
     // Save the transaction receipt's purchaseInfo in the transactionsReceiptStorageDictionary.
+    
     [transactionsReceiptStorageDictionary setObject:purchaseInfoDict forKey:transactionId];
     
     return YES;
@@ -215,6 +216,7 @@ uint32_t signature_length;
 
 
 // Make sure the transaction details actually match the purchase info
+
 - (BOOL)doTransactionDetailsMatchPurchaseInfo:(SKPaymentTransaction *)transaction withPurchaseInfo:(NSDictionary *)purchaseInfoDict
 
 {
@@ -254,12 +256,14 @@ uint32_t signature_length;
     return YES;
 }
 
-
+// Transaction ID Unique r not Checking method
 
 - (BOOL)isTransactionIdUnique:(NSString *)transactionId
 {
     NSString *transactionDictionary = KNOWN_TRANSACTIONS_KEY;
-    // Save the transactionId to the standardUserDefaults so we can check against that later
+    
+// Save the transactionId to the standardUserDefaults so we can check against that later
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
     
@@ -273,32 +277,39 @@ uint32_t signature_length;
     {
         return YES;
     }
+    
     // The transaction already exists in the defaults.
     return NO;
 }
 
-
+// Saving transaction ID
 - (void)saveTransactionId:(NSString *)transactionId
 {
     // Save the transactionId to the standardUserDefaults so we can check against that later
     // If dictionary exists already then retrieve it and add new transactionID
     // Regardless save transactionID to dictionary which gets saved to NSUserDefaults
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     NSString *transactionDictionary = KNOWN_TRANSACTIONS_KEY;
+    
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:
                                        [defaults objectForKey:transactionDictionary]];
     if (!dictionary)
     {
         dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:1], transactionId, nil];
-    } else {
+    }
+    else
+    {
         [dictionary setObject:[NSNumber numberWithInt:1] forKey:transactionId];
     }
+    
     [defaults setObject:dictionary forKey:transactionDictionary];
     [defaults synchronize];
     
 }
 
-
+// Checking transaction Info matches Receipt r not
 - (BOOL)doesTransactionInfoMatchReceipt:(NSString*) receiptString
 {
     // Convert the responseString into a dictionary and pull out the receipt data.
@@ -306,12 +317,16 @@ uint32_t signature_length;
     
     // Check the status of the verifyReceipt call
     id status = [verifiedReceiptDictionary objectForKey:@"status"];
+    
     if (!status)
     {
         return NO;
     }
+    
     int verifyReceiptStatus = [status integerValue];
+    
     // 21006 = This receipt is valid but the subscription has expired.
+    
     if (0 != verifyReceiptStatus && 21006 != verifyReceiptStatus)
     {
         return NO;
@@ -325,6 +340,7 @@ uint32_t signature_length;
     NSString *transactionIdFromVerifiedReceipt      = [verifiedReceiptReceiptDictionary objectForKey:@"transaction_id"];
     
     // Get the transaction's receipt data from the transactionsReceiptStorageDictionary
+    
     NSDictionary *purchaseInfoFromTransaction = [transactionsReceiptStorageDictionary objectForKey:transactionIdFromVerifiedReceipt];
     
     if (!purchaseInfoFromTransaction)
@@ -333,11 +349,11 @@ uint32_t signature_length;
         return NO;
     }
     
-    
     // NOTE: Instead of counting errors you could just return early.
     int failCount = 0;
     
     // Verify all the receipt specifics to ensure everything matches up as expected
+    
     if (![[verifiedReceiptReceiptDictionary objectForKey:@"bid"]
           isEqualToString:[purchaseInfoFromTransaction objectForKey:@"bid"]])
     {
@@ -362,7 +378,8 @@ uint32_t signature_length;
         failCount++;
     }
     
-    if ([[UIDevice currentDevice] respondsToSelector:NSSelectorFromString(@"identifierForVendor")]) // iOS 6?
+    if ([[UIDevice currentDevice] respondsToSelector:NSSelectorFromString(@"identifierForVendor")])
+        // iOS 6?
     {
         // iOS 6 (or later)
         NSString *localIdentifier                   = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -381,8 +398,7 @@ uint32_t signature_length;
         }
     }
     
-    
-    // Do addition time checks for the transaction and receipt.
+        // Do addition time checks for the transaction and receipt.
     
     if(failCount != 0)
     {
@@ -420,7 +436,7 @@ uint32_t signature_length;
     completionHandler(FALSE);
     
 }
-
+// Response of NSURL Connection
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -454,7 +470,6 @@ uint32_t signature_length;
     }
     
 }
-
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
@@ -506,7 +521,8 @@ uint32_t signature_length;
                 didUseCredential = YES;
             }
         }
-        if (! didUseCredential) {
+        if (! didUseCredential)
+        {
             [[challenge sender] cancelAuthenticationChallenge:challenge];
         }
     }

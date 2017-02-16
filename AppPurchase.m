@@ -14,11 +14,6 @@
 #import "BuyAppViewController.h"
 
 
-
-
-//UIKIT_EXTERN NSString *const kSubscriptionExpirationDateKey;
-//NSString *const kSubscriptionExpirationDateKey = @"ExpirationDate";
-
 @interface AppPurchase()<SKProductsRequestDelegate,SKPaymentTransactionObserver>
 
 
@@ -50,12 +45,14 @@
 {
     _completionHandler=[completionHandler copy];
     NSMutableSet *productIdentifiers=[NSMutableSet setWithCapacity:_products.count];
+    
     for (AppPurchaseProductProcess *product in _products.allValues)
     {
         product.isAvilableForPurchase = NO;
        [productIdentifiers addObject:product.productIdentifier];
        
     }
+    
     productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
     productsRequest.delegate = self;
     [productsRequest start];
@@ -68,6 +65,7 @@
     NSLog(@"In App Purchase app deatils:-");
     productsRequest=nil;
     NSArray *skProducts=response.products;
+    
     for(SKProduct *skProduct in skProducts)
     {
         AppPurchaseProductProcess *product=_products[skProduct.productIdentifier];
@@ -78,6 +76,7 @@
         NSLog(@"Product price:%0.2f",skProduct.price.floatValue);
         NSLog(@"Product description:%@",skProduct.localizedDescription);
     }
+    
     for (NSString *invalidProductIdentifier in response.invalidProductIdentifiers)
     {
         AppPurchaseProductProcess *product=_products[invalidProductIdentifier];
@@ -122,21 +121,23 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    for (SKPaymentTransaction * transaction in transactions)
-    {
-        switch (transaction.transactionState) {
-           
-            case SKPaymentTransactionStatePurchased:
-                [self completeTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
+       for (SKPaymentTransaction * transaction in transactions)
+       {
+               switch (transaction.transactionState)
+            {
+                 case SKPaymentTransactionStatePurchased:
+                 [self completeTransaction:transaction];
+                 break;
+            
+                case SKPaymentTransactionStateFailed:
                 [self failedTransaction:transaction];
                 break;
-            case SKPaymentTransactionStateRestored:
+        
+                case SKPaymentTransactionStateRestored:
                 [self restoreTransaction:transaction];
-            default: break;
-        }
-}
+                default: break;
+            }
+       }
 }
 
 //4.1. Checking Trasation Completed Sucsefully r Not
@@ -145,7 +146,6 @@
 {
     
     NSLog(@"completeTransaction...");
-    
     
     
     [self validateReceiptForTransaction:transaction];
@@ -177,7 +177,7 @@
      }];
 }
 
-
+// Restore transaction...
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction
 {
     NSLog(@"restoreTransaction...");
@@ -230,10 +230,7 @@
     {
         
         NSLog(@"Unlock the content for User After subscribption done sucssefully");
-//        buyVC = [[BuyAppViewController alloc]init];
-//        
-//        [buyVC goToContentVC];
-//        
+
 
     }
     

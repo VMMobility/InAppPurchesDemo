@@ -20,9 +20,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
-   
-    
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [AppPurchaseProduct sharedInstance];
     

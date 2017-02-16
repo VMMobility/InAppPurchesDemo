@@ -28,7 +28,8 @@
 
 @implementation BuyAppViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden=NO;
@@ -40,7 +41,8 @@
     [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -81,7 +83,6 @@
 -(void)goToContentVC
 {
   
-    
     [self performSegueWithIdentifier:@"toContentVC" sender:self];
     
 }

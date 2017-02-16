@@ -58,15 +58,14 @@
     
 //    [refreshControl beginRefreshing];
     
-    
-    
-    
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
+    
     [super didReceiveMemoryWarning];
    
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -140,13 +139,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"buyApp"])
-{
+   {
     
     BuyAppViewController *detailViewController =(BuyAppViewController *) segue.destinationViewController;
     NSIndexPath * indexPath = (NSIndexPath *)sender;
     AppPurchaseProductProcess *product = products[indexPath.row];
     detailViewController.product = product;
-}
+   
+   }
+
 }
 
 
