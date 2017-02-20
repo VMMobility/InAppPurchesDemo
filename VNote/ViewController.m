@@ -19,6 +19,8 @@
 @interface ViewController ()<SKProductsRequestDelegate,SKPaymentTransactionObserver,UITableViewDataSource,UITableViewDelegate>
 {
     
+    
+    
     NSArray * products;
     NSNumberFormatter *priceFormatter;
     
