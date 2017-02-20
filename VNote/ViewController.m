@@ -58,6 +58,8 @@
     
 //    [refreshControl beginRefreshing];
     
+    NSLog(@"Pusshing Complete code to git hub");
+
 }
 
 - (void)didReceiveMemoryWarning
