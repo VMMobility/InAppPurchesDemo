@@ -21,6 +21,8 @@
     
     
     
+    
+    
     NSArray * products;
     NSNumberFormatter *priceFormatter;
     
