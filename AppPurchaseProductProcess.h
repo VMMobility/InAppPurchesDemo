@@ -19,8 +19,6 @@
 - (BOOL)allowedToPurchase;
 
 
-
-
 @property(assign,nonatomic)BOOL isAvilableForPurchase;
 @property(nonatomic,strong)NSString *productIdentifier;
 @property(nonatomic,strong)SKProduct *skProduct;
